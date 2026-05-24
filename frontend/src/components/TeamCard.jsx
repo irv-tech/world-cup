@@ -1,13 +1,13 @@
 function TeamCard({ team }) {
-    return (
-        <div className="card">
-            <h2>{team.name}</h2>
+  return (
+    <div className="card">
+      <h2>{team.name}</h2>
 
-            <p>Wins: {team.wins}</p>
+      <p>Country Code: {team.tla}</p>
 
-            <p>Losses: {team.losses}</p>
-        </div>
-    )
+      <p>Founded: {team.founded}</p>
+    </div>
+  );
 }
 
 export default TeamCard;
