@@ -23,3 +23,21 @@ dist-ssr
 *.sln
 *.sw?
 .env
+# Environment variables
+backend/.env
+
+# Python virtual environment
+backend/venv/
+
+# Node modules
+frontend/node_modules/
+
+# Python cache
+__pycache__/
+
+# VS Code settings
+.vscode/
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db

@@ -1,17 +1,8 @@
-const API_KEY = import.meta.env.VITE_API_KEY;
-
-const BASE_URL = "https://api.football-data.org/v4";
+const BASE_URL = "http://127.0.0.1:8000";
 
 export async function getTeams() {
   try {
-    const response = await fetch(
-      `${BASE_URL}/competitions/WC/teams`,
-      {
-        headers: {
-          "X-Auth-Token": API_KEY,
-        },
-      }
-    );
+    const response = await fetch(`${BASE_URL}/teams`);
 
     if (!response.ok) {
       throw new Error(`HTTP Error: ${response.status}`);
@@ -19,12 +10,11 @@ export async function getTeams() {
 
     const data = await response.json();
 
-    console.log(data);
+    console.log("Teams from backend:", data);
 
-    return data.teams || [];
+    return data;
   } catch (error) {
     console.error("API Error:", error);
-
     return [];
   }
 }
