@@ -9,6 +9,8 @@ import Matches from "./pages/Matches";
 import History from "./pages/History";
 import Login from "./pages/Login";
 
+import TeamDetails from "./pages/TeamDetails";
+
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/teams" element={<Teams />} />
+        <Route path="/teams/:id" element={<TeamDetails />} />
         <Route path="/players" element={<Players />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/history" element={<History />} />

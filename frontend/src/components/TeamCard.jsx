@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import worldCupStats from "../data/worldCupStats";
 
 function TeamCard({ team }) {
@@ -14,12 +15,10 @@ function TeamCard({ team }) {
       <h2>{team.name}</h2>
 
       <p><strong>Code:</strong> {team.tla || "N/A"}</p>
-      <p><strong>World Cup Championships:</strong> {stats.championships}</p>
-      <p><strong>World Cup Appearances:</strong> {stats.appearances}</p>
-      <p>
-        <strong>Title Years:</strong>{" "}
-        {stats.previousTitles.length > 0 ? stats.previousTitles.join(", ") : "None"}
-      </p>
+      <p><strong>Championships:</strong> {stats.championships}</p>
+      <p><strong>Appearances:</strong> {stats.appearances}</p>
+
+      <Link to={`/teams/${team.id}`}>View Team Details</Link>
     </div>
   );
 }
