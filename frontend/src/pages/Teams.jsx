@@ -5,6 +5,7 @@ import { getTeams } from "../services/footballApi";
 function Teams() {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     async function loadTeams() {
@@ -27,14 +28,26 @@ function Teams() {
     );
   }
 
+  const filteredTeams = teams.filter((team) =>
+    team.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="page-container">
       <h1>World Cup Teams</h1>
 
       {teams.length === 0 && <p>No teams found.</p>}
 
+      <input
+        type="text"
+        placeholder="Search teams..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
+
       <div className="card-grid">
-        {teams.map((team) => (
+        {filteredTeams.map((team) => (
           <TeamCard key={team.id} team={team} />
         ))}
       </div>
