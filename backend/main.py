@@ -79,3 +79,40 @@ def get_players():
             })
 
     return players
+
+@app.get("/matches")
+def get_matches():
+    if not API_KEY:
+        return {"error": "Missing FOOTBALL_API_KEY"}
+
+    response = requests.get(
+        f"{BASE_URL}/competitions/WC/matches",
+        headers={"X-Auth-Token": API_KEY}
+    )
+
+    if response.status_code != 200:
+        return {
+            "error": "Failed to fetch matches",
+            "status_code": response.status_code,
+            "details": response.text
+        }
+
+    data = response.json()
+    matches = data.get("matches", [])
+
+    formatted_matches = []
+
+    for match in matches:
+        formatted_matches.append({
+            "id": match.get("id"),
+            "utcDate": match.get("utcDate"),
+            "status": match.get("status"),
+            "stage": match.get("stage"),
+            "homeTeam": match.get("homeTeam", {}).get("name"),
+            "awayTeam": match.get("awayTeam", {}).get("name"),
+            "homeCrest": match.get("homeTeam", {}).get("crest"),
+            "awayCrest": match.get("awayTeam", {}).get("crest"),
+            "score": match.get("score")
+        })
+
+    return formatted_matches

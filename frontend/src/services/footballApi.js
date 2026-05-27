@@ -33,3 +33,18 @@ export async function getPlayers() {
     return [];
   }
 }
+
+export async function getMatches() {
+  try {
+    const response = await fetch(`${BASE_URL}/matches`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP Error: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("API Error:", error);
+    return [];
+  }
+}
