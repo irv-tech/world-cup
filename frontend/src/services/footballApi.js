@@ -18,3 +18,18 @@ export async function getTeams() {
     return [];
   }
 }
+
+export async function getPlayers() {
+  try {
+    const response = await fetch(`${BASE_URL}/players`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP Error: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("API Error:", error);
+    return [];
+  }
+}

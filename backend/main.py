@@ -42,3 +42,40 @@ def get_teams():
 
     data = response.json()
     return data.get("teams", [])
+
+@app.get("/players")
+def get_players():
+    if not API_KEY:
+        return {"error": "Missing FOOTBALL_API_KEY"}
+
+    response = requests.get(
+        f"{BASE_URL}/competitions/WC/teams",
+        headers={"X-Auth-Token": API_KEY}
+    )
+
+    if response.status_code != 200:
+        return {
+            "error": "Failed to fetch players",
+            "status_code": response.status_code,
+            "details": response.text
+        }
+
+    data = response.json()
+    teams = data.get("teams", [])
+
+    players = []
+
+    for team in teams:
+        for player in team.get("squad", []):
+            players.append({
+                "id": player.get("id"),
+                "name": player.get("name"),
+                "position": player.get("position"),
+                "dateOfBirth": player.get("dateOfBirth"),
+                "nationality": player.get("nationality"),
+                "team": team.get("name"),
+                "teamCode": team.get("tla"),
+                "teamCrest": team.get("crest")
+            })
+
+    return players
