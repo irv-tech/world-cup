@@ -3,10 +3,18 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 import os
 from dotenv import load_dotenv
+from database.database import engine
+from models.user import User
+from database.database import Base
+from routes import auth
+
+Base.metadata.create_all(bind=engine)
 
 load_dotenv()
 
 app = FastAPI()
+
+app.include_router(auth.router)
 
 app.add_middleware(
     CORSMiddleware,
