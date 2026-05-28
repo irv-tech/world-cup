@@ -9,6 +9,7 @@ function Navbar() {
       <Link to="/matches">Matches</Link> | 
       <Link to="/history">History</Link> | 
       <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
     </nav>
   );
 }

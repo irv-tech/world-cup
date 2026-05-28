@@ -8,7 +8,7 @@ import Players from "./pages/Players";
 import Matches from "./pages/Matches";
 import History from "./pages/History";
 import Login from "./pages/Login";
-
+import Register from "./pages/Register";
 import TeamDetails from "./pages/TeamDetails";
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
         <Route path="/matches" element={<Matches />} />
         <Route path="/history" element={<History />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
