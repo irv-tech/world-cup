@@ -124,3 +124,13 @@ button:hover {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
+.nav-user {
+  color: white;
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+nav button {
+  margin-left: 1rem;
+}

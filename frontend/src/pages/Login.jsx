@@ -14,6 +14,7 @@ function Login() {
 
       localStorage.setItem("token", data.access_token);
       localStorage.setItem("username", data.user.username);
+      window.dispatchEvent(new Event("authChange"));
 
       setMessage(`Logged in as ${data.user.username}`);
     } catch (error) {
