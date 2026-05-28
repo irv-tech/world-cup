@@ -6,6 +6,9 @@ from models.user import User
 from schemas.user import UserCreate
 from utils.security import hash_password
 
+from schemas.user import UserCreate, UserLogin
+from utils.security import hash_password, verify_password, create_access_token
+
 router = APIRouter(
     prefix="/auth",
     tags=["Authentication"]
@@ -47,5 +50,37 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
             "id": new_user.id,
             "username": new_user.username,
             "email": new_user.email
+        }
+    }
+
+@router.post("/login")
+def login_user(user: UserLogin, db: Session = Depends(get_db)):
+    existing_user = db.query(User).filter(
+        User.username == user.username
+    ).first()
+
+    if not existing_user:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid username or password"
+        )
+
+    if not verify_password(user.password, existing_user.hashed_password):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid username or password"
+        )
+
+    access_token = create_access_token(
+        data={"sub": existing_user.username}
+    )
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": {
+            "id": existing_user.id,
+            "username": existing_user.username,
+            "email": existing_user.email
         }
     }
