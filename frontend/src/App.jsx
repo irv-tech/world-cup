@@ -10,6 +10,8 @@ import History from "./pages/History";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import TeamDetails from "./pages/TeamDetails";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -25,6 +27,14 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

@@ -38,6 +38,7 @@ function Navbar() {
         <>
           <span className="nav-user">Logged in as {username}</span>
           <button onClick={handleLogout}>Logout</button>
+          {username && <Link to="/dashboard">Dashboard</Link>}
         </>
       ) : (
         <>
