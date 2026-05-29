@@ -1,11 +1,15 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from jose import jwt
+from fastapi import HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer
 
 pwd_context = CryptContext(
     schemes=["bcrypt"],
     deprecated="auto"
 )
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 SECRET_KEY = "change-this-secret-key-later"
 ALGORITHM = "HS256"
@@ -27,3 +31,15 @@ def create_access_token(data: dict):
     to_encode.update({"exp": expire})
 
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+def get_current_username(token: str = Depends(oauth2_scheme)):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username = payload.get("sub")
+
+        if username is None:
+            raise HTTPException(status_code=401, detail="Invalid token")
+
+        return username
+
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid token")
