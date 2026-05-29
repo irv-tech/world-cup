@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import worldCupStats from "../data/worldCupStats";
+import { addFavoriteTeam } from "../services/favoritesApi";
 
 function TeamCard({ team }) {
   const stats = worldCupStats[team.name] || {
@@ -7,6 +8,15 @@ function TeamCard({ team }) {
     appearances: "N/A",
     previousTitles: [],
   };
+
+  async function handleAddFavorite() {
+    try {
+      await addFavoriteTeam(team);
+      alert(`${team.name} added to favorites`);
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 
   return (
     <div className="card">
@@ -19,6 +29,8 @@ function TeamCard({ team }) {
       <p><strong>Appearances:</strong> {stats.appearances}</p>
 
       <Link to={`/teams/${team.id}`}>View Team Details</Link>
+
+      <button onClick={handleAddFavorite}>Add to Favorites</button>
     </div>
   );
 }
