@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
-import { getFavoriteTeams, deleteFavoriteTeam } from "../services/favoritesApi";
+import {
+  getFavoriteTeams,
+  deleteFavoriteTeam,
+  getFavoritePlayers,
+  deleteFavoritePlayer,
+} from "../services/favoritesApi";
 
 function Dashboard() {
   const username = localStorage.getItem("username");
   const [favoriteTeams, setFavoriteTeams] = useState([]);
+  const [favoritePlayers, setFavoritePlayers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function handleRemoveFavorite(favoriteId) {
+  async function handleRemoveFavoriteTeam(favoriteId) {
     try {
       await deleteFavoriteTeam(favoriteId);
 
@@ -18,11 +24,26 @@ function Dashboard() {
     }
   }
 
+  async function handleRemoveFavoritePlayer(favoriteId) {
+    try {
+      await deleteFavoritePlayer(favoriteId);
+
+      setFavoritePlayers((currentPlayers) =>
+        currentPlayers.filter((player) => player.id !== favoriteId)
+      );
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   useEffect(() => {
     async function loadFavorites() {
       try {
-        const data = await getFavoriteTeams();
-        setFavoriteTeams(data);
+        const teams = await getFavoriteTeams();
+        const players = await getFavoritePlayers();
+
+        setFavoriteTeams(teams);
+        setFavoritePlayers(players);
       } catch (error) {
         console.error("Failed to load favorites:", error);
       } finally {
@@ -65,8 +86,39 @@ function Dashboard() {
             <p>
               <strong>Code:</strong> {team.team_code}
             </p>
-            <button onClick={() => handleRemoveFavorite(team.id)}>
-                Remove Favorite
+
+            <button onClick={() => handleRemoveFavoriteTeam(team.id)}>
+              Remove Favorite
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <h2>Favorite Players</h2>
+
+      {favoritePlayers.length === 0 && (
+        <p>You have not added any favorite players yet.</p>
+      )}
+
+      <div className="card-grid">
+        {favoritePlayers.map((player) => (
+          <div className="card" key={player.id}>
+            <h3>{player.player_name}</h3>
+
+            <p>
+              <strong>Team:</strong> {player.team_name}
+            </p>
+
+            <p>
+              <strong>Position:</strong> {player.position}
+            </p>
+
+            <p>
+              <strong>Nationality:</strong> {player.nationality}
+            </p>
+
+            <button onClick={() => handleRemoveFavoritePlayer(player.id)}>
+              Remove Favorite
             </button>
           </div>
         ))}

@@ -55,3 +55,59 @@ export async function deleteFavoriteTeam(favoriteId) {
 
   return data;
 }
+
+export async function addFavoritePlayer(player) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${BASE_URL}/favorites/players`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(player),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to add favorite player");
+  }
+
+  return data;
+}
+
+export async function getFavoritePlayers() {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${BASE_URL}/favorites/players`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to load favorite players");
+  }
+
+  return await response.json();
+}
+
+export async function deleteFavoritePlayer(favoriteId) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${BASE_URL}/favorites/players/${favoriteId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to remove favorite player");
+  }
+
+  return data;
+}
