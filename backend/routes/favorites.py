@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from database.database import SessionLocal
 from models.favorite import FavoriteTeam
+from models.favorite_player import FavoritePlayer
 from utils.security import get_current_username
 
 router = APIRouter(
@@ -81,3 +82,66 @@ def delete_favorite_team(
     db.commit()
 
     return {"message": "Favorite team removed"}
+
+@router.post("/players")
+def add_favorite_player(
+    player: dict,
+    db: Session = Depends(get_db),
+    username: str = Depends(get_current_username)
+):
+    existing_favorite = db.query(FavoritePlayer).filter(
+        FavoritePlayer.username == username,
+        FavoritePlayer.player_id == player.get("id")
+    ).first()
+
+    if existing_favorite:
+        raise HTTPException(
+            status_code=400,
+            detail="Player already favorited"
+        )
+
+    favorite = FavoritePlayer(
+        username=username,
+        player_id=player.get("id"),
+        player_name=player.get("name"),
+        team_name=player.get("team"),
+        position=player.get("position"),
+        nationality=player.get("nationality")
+    )
+
+    db.add(favorite)
+    db.commit()
+    db.refresh(favorite)
+
+    return {"message": "Player added to favorites"}
+
+@router.get("/players")
+def get_favorite_players(
+    db: Session = Depends(get_db),
+    username: str = Depends(get_current_username)
+):
+    return db.query(FavoritePlayer).filter(
+        FavoritePlayer.username == username
+    ).all()
+
+@router.delete("/players/{favorite_id}")
+def delete_favorite_player(
+    favorite_id: int,
+    db: Session = Depends(get_db),
+    username: str = Depends(get_current_username)
+):
+    favorite = db.query(FavoritePlayer).filter(
+        FavoritePlayer.id == favorite_id,
+        FavoritePlayer.username == username
+    ).first()
+
+    if not favorite:
+        raise HTTPException(
+            status_code=404,
+            detail="Favorite player not found"
+        )
+
+    db.delete(favorite)
+    db.commit()
+
+    return {"message": "Favorite player removed"}

@@ -8,6 +8,7 @@ from models.user import User
 from database.database import Base
 from routes import auth
 from models.favorite import FavoriteTeam
+from models.favorite_player import FavoritePlayer
 from routes import favorites
 
 Base.metadata.create_all(bind=engine)
