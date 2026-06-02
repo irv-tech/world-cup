@@ -36,3 +36,22 @@ export async function getFavoriteTeams() {
 
   return await response.json();
 }
+
+export async function deleteFavoriteTeam(favoriteId) {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${BASE_URL}/favorites/teams/${favoriteId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Failed to remove favorite");
+  }
+
+  return data;
+}

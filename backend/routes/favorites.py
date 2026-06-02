@@ -59,3 +59,25 @@ def get_favorite_teams(
     ).all()
 
     return favorites
+
+@router.delete("/teams/{favorite_id}")
+def delete_favorite_team(
+    favorite_id: int,
+    db: Session = Depends(get_db),
+    username: str = Depends(get_current_username)
+):
+    favorite = db.query(FavoriteTeam).filter(
+        FavoriteTeam.id == favorite_id,
+        FavoriteTeam.username == username
+    ).first()
+
+    if not favorite:
+        raise HTTPException(
+            status_code=404,
+            detail="Favorite team not found"
+        )
+
+    db.delete(favorite)
+    db.commit()
+
+    return {"message": "Favorite team removed"}

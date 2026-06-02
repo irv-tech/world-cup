@@ -1,10 +1,22 @@
 import { useEffect, useState } from "react";
-import { getFavoriteTeams } from "../services/favoritesApi";
+import { getFavoriteTeams, deleteFavoriteTeam } from "../services/favoritesApi";
 
 function Dashboard() {
   const username = localStorage.getItem("username");
   const [favoriteTeams, setFavoriteTeams] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  async function handleRemoveFavorite(favoriteId) {
+    try {
+      await deleteFavoriteTeam(favoriteId);
+
+      setFavoriteTeams((currentFavorites) =>
+        currentFavorites.filter((team) => team.id !== favoriteId)
+      );
+    } catch (error) {
+      alert(error.message);
+    }
+  }
 
   useEffect(() => {
     async function loadFavorites() {
@@ -53,6 +65,9 @@ function Dashboard() {
             <p>
               <strong>Code:</strong> {team.team_code}
             </p>
+            <button onClick={() => handleRemoveFavorite(team.id)}>
+                Remove Favorite
+            </button>
           </div>
         ))}
       </div>
