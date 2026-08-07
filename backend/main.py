@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 import os
 from dotenv import load_dotenv
+
 from database.database import engine
 from models.user import User
 from database.database import Base
@@ -20,9 +21,20 @@ app = FastAPI()
 app.include_router(auth.router)
 app.include_router(favorites.router)
 
+cors_origins = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:5173"
+).split(",")
+
+allowed_origins = [
+    origin.strip()
+    for origin in cors_origins
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
