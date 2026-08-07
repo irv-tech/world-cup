@@ -3,13 +3,46 @@ function MatchCard({ match }) {
     ? new Date(match.utcDate).toLocaleString()
     : "Date TBD";
 
-  return (
-    <div className="card">
-      <h2>{match.homeTeam || "TBD"} vs {match.awayTeam || "TBD"}</h2>
+  const homeScore = match.score?.fullTime?.home ?? "-";
+  const awayScore = match.score?.fullTime?.away ?? "-";
 
-      <p><strong>Date:</strong> {matchDate}</p>
-      <p><strong>Status:</strong> {match.status || "N/A"}</p>
-      <p><strong>Stage:</strong> {match.stage || "N/A"}</p>
+  return (
+    <div className="match-card">
+      <div className="match-teams">
+
+        <div className="match-team">
+          {match.homeCrest && (
+            <img
+              src={match.homeCrest}
+              alt={`${match.homeTeam} flag`}
+              className="match-flag"
+            />
+          )}
+
+          <strong>{match.homeTeam || "TBD"}</strong>
+        </div>
+
+        <div className="match-score">
+            {homeScore} - {awayScore}
+        </div>
+
+        <div className="match-team">
+          {match.awayCrest && (
+            <img
+              src={match.awayCrest}
+              alt={`${match.awayTeam} flag`}
+              className="match-flag"
+            />
+          )}
+
+          <strong>{match.awayTeam || "TBD"}</strong>
+        </div>
+
+      </div>
+
+      <p>
+        <strong>Date:</strong> {matchDate}
+      </p>
     </div>
   );
 }
