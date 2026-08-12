@@ -11,6 +11,8 @@ from routes import auth
 from models.favorite import FavoriteTeam
 from models.favorite_player import FavoritePlayer
 from routes import favorites
+import json
+from pathlib import Path
 
 Base.metadata.create_all(bind=engine)
 
@@ -140,3 +142,29 @@ def get_matches():
         })
 
     return formatted_matches
+
+@app.get("/world-cup-info")
+def get_world_cup_info():
+    if not API_KEY:
+        return {"error": "Missing FOOTBALL_API_KEY"}
+
+    response = requests.get(
+        f"{BASE_URL}/competitions/WC",
+        headers={"X-Auth-Token": API_KEY}
+    )
+
+    if response.status_code != 200:
+        return {
+            "error": "Failed to fetch World Cup information",
+            "status_code": response.status_code,
+            "details": response.text
+        }
+
+    return response.json()
+
+@app.get("/history")
+def get_world_cup_history():
+    history_file = Path(__file__).parent / "data" / "world_cup_history.json"
+
+    with open(history_file, "r", encoding="utf-8") as file:
+        return json.load(file)
