@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import TeamDetails from "./pages/TeamDetails";
 import Dashboard from "./pages/Dashboard";
+import TournamentHistory from "./pages/TournamentHistory";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
         <Route path="/players" element={<Players />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/history" element={<History />} />
+        <Route
+          path="/history/:year"
+          element={<TournamentHistory />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route

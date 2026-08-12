@@ -30,5 +30,149 @@
     "runnerUp": "Netherlands",
     "finalScore": "1-0 (AET)",
     "thirdPlace": "Germany"
+  },
+  {
+    "year": 2006,
+    "host": "Germany",
+    "champion": "Italy",
+    "runnerUp": "France",
+    "finalScore": "1-1 (5-3 pens)",
+    "thirdPlace": "Germany"
+  },
+  {
+    "year": 2002,
+    "host": "South Korea / Japan",
+    "champion": "Brazil",
+    "runnerUp": "Germany",
+    "finalScore": "2-0",
+    "thirdPlace": "Turkey"
+  },
+  {
+    "year": 1998,
+    "host": "France",
+    "champion": "France",
+    "runnerUp": "Brazil",
+    "finalScore": "3-0",
+    "thirdPlace": "Croatia"
+  },
+  {
+    "year": 1994,
+    "host": "United States",
+    "champion": "Brazil",
+    "runnerUp": "Italy",
+    "finalScore": "0-0 (3-2 pens)",
+    "thirdPlace": "Sweden"
+  },
+  {
+    "year": 1990,
+    "host": "Italy",
+    "champion": "West Germany",
+    "runnerUp": "Argentina",
+    "finalScore": "1-0",
+    "thirdPlace": "Italy"
+  },
+  {
+    "year": 1986,
+    "host": "Mexico",
+    "champion": "Argentina",
+    "runnerUp": "West Germany",
+    "finalScore": "3-2",
+    "thirdPlace": "France"
+  },
+  {
+    "year": 1982,
+    "host": "Spain",
+    "champion": "Italy",
+    "runnerUp": "West Germany",
+    "finalScore": "3-1",
+    "thirdPlace": "Poland"
+  },
+  {
+    "year": 1978,
+    "host": "Argentina",
+    "champion": "Argentina",
+    "runnerUp": "Netherlands",
+    "finalScore": "3-1 (AET)",
+    "thirdPlace": "Brazil"
+  },
+  {
+    "year": 1974,
+    "host": "West Germany",
+    "champion": "West Germany",
+    "runnerUp": "Netherlands",
+    "finalScore": "2-1",
+    "thirdPlace": "Poland"
+  },
+  {
+    "year": 1970,
+    "host": "Mexico",
+    "champion": "Brazil",
+    "runnerUp": "Italy",
+    "finalScore": "4-1",
+    "thirdPlace": "West Germany"
+  },
+  {
+    "year": 1966,
+    "host": "England",
+    "champion": "England",
+    "runnerUp": "West Germany",
+    "finalScore": "4-2 (AET)",
+    "thirdPlace": "Portugal"
+  },
+  {
+    "year": 1962,
+    "host": "Chile",
+    "champion": "Brazil",
+    "runnerUp": "Czechoslovakia",
+    "finalScore": "3-1",
+    "thirdPlace": "Chile"
+  },
+  {
+    "year": 1958,
+    "host": "Sweden",
+    "champion": "Brazil",
+    "runnerUp": "Sweden",
+    "finalScore": "5-2",
+    "thirdPlace": "France"
+  },
+  {
+    "year": 1954,
+    "host": "Switzerland",
+    "champion": "West Germany",
+    "runnerUp": "Hungary",
+    "finalScore": "3-2",
+    "thirdPlace": "Austria"
+  },
+  {
+    "year": 1950,
+    "host": "Brazil",
+    "champion": "Uruguay",
+    "runnerUp": "Brazil",
+    "finalScore": "2-1 decisive final-round match",
+    "thirdPlace": "Sweden"
+  },
+  {
+    "year": 1938,
+    "host": "France",
+    "champion": "Italy",
+    "runnerUp": "Hungary",
+    "finalScore": "4-2",
+    "thirdPlace": "Brazil"
+  },
+  {
+    "year": 1934,
+    "host": "Italy",
+    "champion": "Italy",
+    "runnerUp": "Czechoslovakia",
+    "finalScore": "2-1 (AET)",
+    "thirdPlace": "Germany"
+  },
+  {
+    "year": 1930,
+    "host": "Uruguay",
+    "champion": "Uruguay",
+    "runnerUp": "Argentina",
+    "finalScore": "4-2",
+    "thirdPlace": "United States"
   }
 ]

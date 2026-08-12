@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function History() {
   const [worldCupHistory, setWorldCupHistory] = useState([]);
@@ -64,6 +65,13 @@ function History() {
             <p>
               <strong>Third Place:</strong> {cup.thirdPlace}
             </p>
+
+            <Link
+              to={`/history/${cup.year}`}
+              className="home-button primary"
+            >
+              Explore {cup.year}
+            </Link>
           </div>
         ))}
       </div>

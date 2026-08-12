@@ -168,3 +168,20 @@ def get_world_cup_history():
 
     with open(history_file, "r", encoding="utf-8") as file:
         return json.load(file)
+
+@app.get("/history/{year}/matches")
+def get_historical_matches(year: int):
+    history_file = Path(__file__).parent / "data" / "world_cup_matches.json"
+
+    with open(history_file, "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    tournament_id = f"WC-{year}"
+
+    matches = [
+        match
+        for match in data
+        if match.get("tournament_id") == tournament_id
+    ]
+
+    return matches

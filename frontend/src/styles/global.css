@@ -294,3 +294,63 @@ nav button {
     padding: 1rem;
   }
 }
+
+.history-back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #0284c7;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.history-back-link:hover {
+  text-decoration: underline;
+}
+
+.tournament-hero {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: white;
+  border-radius: 18px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.tournament-hero h1 {
+  color: white;
+  margin-top: 0;
+}
+
+.tournament-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.tournament-summary div {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.tournament-summary span {
+  display: block;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+.tournament-summary strong {
+  font-size: 1.05rem;
+}
+
+.tournament-stage {
+  margin-bottom: 3rem;
+}
+
+.tournament-stage h2 {
+  color: #111827;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
+}
