@@ -145,20 +145,23 @@ function TournamentHistory() {
     return matchStage === standingStage;
   }
 
-function mapHistoricalGroupName(stageName, groupName) {
-  if (String(year) === "1982" && stageName === "second group stage") {
-    const groupMap = {
-      "Group 1": "Group A",
-      "Group 2": "Group B",
-      "Group 3": "Group C",
-      "Group 4": "Group D",
-    };
+  function mapHistoricalGroupName(stageName, groupName) {
+    if (
+      String(year) === "1982" &&
+      stageName === "second group stage"
+    ) {
+      const groupMap = {
+        "Group 1": "Group A",
+        "Group 2": "Group B",
+        "Group 3": "Group C",
+        "Group 4": "Group D",
+      };
 
-    return groupMap[groupName] || groupName;
+      return groupMap[groupName] || groupName;
+    }
+
+    return groupName;
   }
-
-  return groupName;
-}
 
   const nonStandingStages = useMemo(() => {
     const stages = {};
@@ -250,60 +253,161 @@ function mapHistoricalGroupName(stageName, groupName) {
     }
   }, [selectedStage, activeStandingStage]);
 
-function getMatchesForSelectedGroup() {
-  if (!activeStandingStage || !selectedGroup) {
-    return [];
+  function getMatchesForSelectedGroup() {
+    if (!activeStandingStage || !selectedGroup) {
+      return [];
+    }
+
+    const standingStage =
+      activeStandingStage.stageName.toLowerCase();
+
+    return matches.filter((match) => {
+      const matchStage = match.stage_name?.toLowerCase() || "";
+      const rawMatchGroup = match.group_name || "";
+
+      const mappedMatchGroup = mapHistoricalGroupName(
+        standingStage,
+        rawMatchGroup
+      );
+
+      if (
+        standingStage === "group stage" ||
+        standingStage === "first round"
+      ) {
+        return (
+          ["groupstage", "group stage", "first round"].includes(
+            matchStage
+          ) && mappedMatchGroup === selectedGroup
+        );
+      }
+
+      if (standingStage === "first group stage") {
+        return (
+          matchStage === "group stage" &&
+          mappedMatchGroup === selectedGroup
+        );
+      }
+
+      if (standingStage === "second group stage") {
+        return (
+          matchStage === "second group stage" &&
+          mappedMatchGroup === selectedGroup
+        );
+      }
+
+      if (standingStage === "final round") {
+        return matchStage === "final round";
+      }
+
+      return (
+        matchStage === standingStage &&
+        (mappedMatchGroup === selectedGroup ||
+          rawMatchGroup === "not applicable" ||
+          !rawMatchGroup)
+      );
+    });
   }
 
-  const standingStage =
-    activeStandingStage.stageName.toLowerCase();
+  function getHistoricalFlagUrl(teamName) {
+    const countryCodes = {
+      Algeria: "dz",
+      Angola: "ao",
+      Argentina: "ar",
+      Australia: "au",
+      Austria: "at",
+      Belgium: "be",
+      Bolivia: "bo",
+      Brazil: "br",
+      Bulgaria: "bg",
+      Cameroon: "cm",
+      Canada: "ca",
+      Chile: "cl",
+      China: "cn",
+      Colombia: "co",
+      "Costa Rica": "cr",
+      Croatia: "hr",
+      Cuba: "cu",
+      Denmark: "dk",
+      Ecuador: "ec",
+      Egypt: "eg",
+      "El Salvador": "sv",
+      England: "gb-eng",
+      France: "fr",
+      Germany: "de",
+      Ghana: "gh",
+      Greece: "gr",
+      Haiti: "ht",
+      Honduras: "hn",
+      Hungary: "hu",
+      Iceland: "is",
+      Indonesia: "id",
+      Iran: "ir",
+      Iraq: "iq",
+      Israel: "il",
+      Italy: "it",
+      Jamaica: "jm",
+      Japan: "jp",
+      Kuwait: "kw",
+      Mexico: "mx",
+      Morocco: "ma",
+      Netherlands: "nl",
+      "New Zealand": "nz",
+      Nigeria: "ng",
+      "North Korea": "kp",
+      Norway: "no",
+      Panama: "pa",
+      Paraguay: "py",
+      Peru: "pe",
+      Poland: "pl",
+      Portugal: "pt",
+      Qatar: "qa",
+      Romania: "ro",
+      Russia: "ru",
+      "Saudi Arabia": "sa",
+      Scotland: "gb-sct",
+      Senegal: "sn",
+      Serbia: "rs",
+      Slovakia: "sk",
+      Slovenia: "si",
+      "South Africa": "za",
+      "South Korea": "kr",
+      Spain: "es",
+      Sweden: "se",
+      Switzerland: "ch",
+      Togo: "tg",
+      Tunisia: "tn",
+      Turkey: "tr",
+      Ukraine: "ua",
+      Uruguay: "uy",
+      "United States": "us",
+      USA: "us",
+      Wales: "gb-wls",
+      "Ivory Coast": "ci",
+      "Bosnia and Herzegovina": "ba",
+      "Trinidad and Tobago": "tt",
+      "Serbia and Montenegro": "rs",
+      "Czech Republic": "cz",
+      "Republic of Ireland": "ie",
+      "United Arab Emirates": "ae",
+      "Northern Ireland": "gb-nir",
+      Zaire: "cd",
 
-  return matches.filter((match) => {
-    const matchStage = match.stage_name?.toLowerCase() || "";
-    const rawMatchGroup = match.group_name || "";
+      // Historical visual fallbacks
+      "West Germany": "de",
+      "East Germany": "de",
+      Czechoslovakia: "cz",
+      Yugoslavia: "rs",
+      "Soviet Union": "ru",
+    };
 
-    const mappedMatchGroup = mapHistoricalGroupName(
-      standingStage,
-      rawMatchGroup
-    );
+    const code = countryCodes[teamName];
 
-    if (
-      standingStage === "group stage" ||
-      standingStage === "first round"
-    ) {
-      return (
-        ["groupstage", "group stage", "first round"].includes(
-          matchStage
-        ) && mappedMatchGroup === selectedGroup
-      );
+    if (!code) {
+      return null;
     }
 
-    if (standingStage === "first group stage") {
-      return (
-        matchStage === "group stage" &&
-        mappedMatchGroup === selectedGroup
-      );
-    }
-
-    if (standingStage === "second group stage") {
-      return (
-        matchStage === "second group stage" &&
-        mappedMatchGroup === selectedGroup
-      );
-    }
-
-    if (standingStage === "final round") {
-      return matchStage === "final round";
-    }
-
-    return (
-      matchStage === standingStage &&
-      (mappedMatchGroup === selectedGroup ||
-        rawMatchGroup === "not applicable" ||
-        !rawMatchGroup)
-    );
-  });
-}
+    return `https://flagcdn.com/${code}.svg`;
+  }
 
   if (loading) {
     return (
@@ -444,7 +548,15 @@ function getMatchesForSelectedGroup() {
                         <td>{team.position}</td>
 
                         <td className="standings-team">
-                          {team.team_name}
+                          {getHistoricalFlagUrl(team.team_name) && (
+                            <img
+                              src={getHistoricalFlagUrl(team.team_name)}
+                              alt={`${team.team_name} flag`}
+                              className="standings-crest"
+                            />
+                          )}
+
+                          <span>{team.team_name}</span>
                         </td>
 
                         <td>{team.played}</td>
@@ -504,6 +616,14 @@ function getMatchesForSelectedGroup() {
               <div className="match-card" key={match.match_id}>
                 <div className="match-teams">
                   <div className="match-team">
+                    {getHistoricalFlagUrl(match.home_team_name) && (
+                      <img
+                        src={getHistoricalFlagUrl(match.home_team_name)}
+                        alt={`${match.home_team_name} flag`}
+                        className="standings-crest"
+                      />
+                    )}
+
                     <strong>{match.home_team_name}</strong>
                   </div>
 
@@ -513,6 +633,14 @@ function getMatchesForSelectedGroup() {
                   </div>
 
                   <div className="match-team">
+                    {getHistoricalFlagUrl(match.away_team_name) && (
+                      <img
+                        src={getHistoricalFlagUrl(match.away_team_name)}
+                        alt={`${match.away_team_name} flag`}
+                        className="standings-crest"
+                      />
+                    )}
+
                     <strong>{match.away_team_name}</strong>
                   </div>
                 </div>
