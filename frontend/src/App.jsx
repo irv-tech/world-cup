@@ -13,6 +13,7 @@ import TeamDetails from "./pages/TeamDetails";
 import Dashboard from "./pages/Dashboard";
 import TournamentHistory from "./pages/TournamentHistory";
 import ProtectedRoute from "./components/ProtectedRoute";
+import WorldCup2026 from "./pages/WorldCup2026";
 
 function App() {
   return (
@@ -21,17 +22,21 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/world-cup-2026" element={<WorldCup2026 />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/teams/:id" element={<TeamDetails />} />
         <Route path="/players" element={<Players />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/history" element={<History />} />
+
         <Route
           path="/history/:year"
           element={<TournamentHistory />}
         />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
         <Route
           path="/dashboard"
           element={

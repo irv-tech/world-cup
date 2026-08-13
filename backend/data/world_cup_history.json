@@ -5,7 +5,8 @@
     "champion": "Argentina",
     "runnerUp": "France",
     "finalScore": "3-3 (4-2 pens)",
-    "thirdPlace": "Croatia"
+    "thirdPlace": "Croatia",
+    "format": "32 teams were divided into eight groups of four. The top two teams from each group advanced to the Round of 16, followed by a single-elimination knockout stage through the final."
   },
   {
     "year": 2018,
@@ -13,7 +14,8 @@
     "champion": "France",
     "runnerUp": "Croatia",
     "finalScore": "4-2",
-    "thirdPlace": "Belgium"
+    "thirdPlace": "Belgium",
+    "format": "32 teams were divided into eight groups of four. The top two teams from each group advanced to the Round of 16, followed by a single-elimination knockout stage through the final."
   },
   {
     "year": 2014,
@@ -21,7 +23,8 @@
     "champion": "Germany",
     "runnerUp": "Argentina",
     "finalScore": "1-0 (AET)",
-    "thirdPlace": "Netherlands"
+    "thirdPlace": "Netherlands",
+    "format": "32 teams were divided into eight groups of four. The top two teams from each group advanced to the Round of 16, followed by a single-elimination knockout stage through the final."
   },
   {
     "year": 2010,
@@ -29,7 +32,8 @@
     "champion": "Spain",
     "runnerUp": "Netherlands",
     "finalScore": "1-0 (AET)",
-    "thirdPlace": "Germany"
+    "thirdPlace": "Germany",
+    "format": "32 teams were divided into eight groups of four. The top two teams from each group advanced to the Round of 16, followed by a single-elimination knockout stage through the final."
   },
   {
     "year": 2006,
@@ -37,7 +41,8 @@
     "champion": "Italy",
     "runnerUp": "France",
     "finalScore": "1-1 (5-3 pens)",
-    "thirdPlace": "Germany"
+    "thirdPlace": "Germany",
+    "format": "32 teams were divided into eight groups of four. The top two teams from each group advanced to the Round of 16, followed by a single-elimination knockout stage through the final."
   },
   {
     "year": 2002,
@@ -45,7 +50,8 @@
     "champion": "Brazil",
     "runnerUp": "Germany",
     "finalScore": "2-0",
-    "thirdPlace": "Turkey"
+    "thirdPlace": "Turkey",
+    "format": "32 teams were divided into eight groups of four. The top two teams from each group advanced to the Round of 16, followed by a single-elimination knockout stage through the final."
   },
   {
     "year": 1998,
@@ -53,7 +59,8 @@
     "champion": "France",
     "runnerUp": "Brazil",
     "finalScore": "3-0",
-    "thirdPlace": "Croatia"
+    "thirdPlace": "Croatia",
+    "format": "The tournament expanded to 32 teams for the first time. Eight groups of four were followed by a 16-team single-elimination knockout stage."
   },
   {
     "year": 1994,
@@ -61,7 +68,8 @@
     "champion": "Brazil",
     "runnerUp": "Italy",
     "finalScore": "0-0 (3-2 pens)",
-    "thirdPlace": "Sweden"
+    "thirdPlace": "Sweden",
+    "format": "24 teams were divided into six groups of four. The top two teams in each group and the four best third-place teams advanced to the Round of 16."
   },
   {
     "year": 1990,
@@ -69,7 +77,8 @@
     "champion": "West Germany",
     "runnerUp": "Argentina",
     "finalScore": "1-0",
-    "thirdPlace": "Italy"
+    "thirdPlace": "Italy",
+    "format": "24 teams were divided into six groups of four. The top two teams in each group and the four best third-place teams advanced to the Round of 16."
   },
   {
     "year": 1986,
@@ -77,7 +86,8 @@
     "champion": "Argentina",
     "runnerUp": "West Germany",
     "finalScore": "3-2",
-    "thirdPlace": "France"
+    "thirdPlace": "France",
+    "format": "24 teams were divided into six groups of four. The top two teams in each group and the four best third-place teams advanced to a 16-team knockout stage."
   },
   {
     "year": 1982,
@@ -85,7 +95,8 @@
     "champion": "Italy",
     "runnerUp": "West Germany",
     "finalScore": "3-1",
-    "thirdPlace": "Poland"
+    "thirdPlace": "Poland",
+    "format": "24 teams were divided into six first-round groups. The top two teams from each group advanced to four second-round groups of three teams. The four second-round group winners advanced to the semifinals."
   },
   {
     "year": 1978,
@@ -93,7 +104,8 @@
     "champion": "Argentina",
     "runnerUp": "Netherlands",
     "finalScore": "3-1 (AET)",
-    "thirdPlace": "Brazil"
+    "thirdPlace": "Brazil",
+    "format": "16 teams began in four first-round groups. The top two from each group advanced to two second-round groups. The two group winners advanced to the final, while the runners-up played for third place."
   },
   {
     "year": 1974,
@@ -101,7 +113,8 @@
     "champion": "West Germany",
     "runnerUp": "Netherlands",
     "finalScore": "2-1",
-    "thirdPlace": "Poland"
+    "thirdPlace": "Poland",
+    "format": "16 teams began in four first-round groups. The top two from each group advanced to two second-round groups. The two group winners advanced to the final, while the runners-up played for third place."
   },
   {
     "year": 1970,
@@ -109,7 +122,8 @@
     "champion": "Brazil",
     "runnerUp": "Italy",
     "finalScore": "4-1",
-    "thirdPlace": "West Germany"
+    "thirdPlace": "West Germany",
+    "format": "16 teams were divided into four groups of four. The top two teams from each group advanced to the quarterfinals, followed by semifinals, a third-place match, and the final."
   },
   {
     "year": 1966,
@@ -117,7 +131,8 @@
     "champion": "England",
     "runnerUp": "West Germany",
     "finalScore": "4-2 (AET)",
-    "thirdPlace": "Portugal"
+    "thirdPlace": "Portugal",
+    "format": "16 teams were divided into four groups of four. The top two teams from each group advanced to the quarterfinals, followed by semifinals, a third-place match, and the final."
   },
   {
     "year": 1962,
@@ -125,7 +140,8 @@
     "champion": "Brazil",
     "runnerUp": "Czechoslovakia",
     "finalScore": "3-1",
-    "thirdPlace": "Chile"
+    "thirdPlace": "Chile",
+    "format": "16 teams were divided into four groups of four. The top two teams from each group advanced to the quarterfinals, followed by semifinals, a third-place match, and the final."
   },
   {
     "year": 1958,
@@ -133,7 +149,8 @@
     "champion": "Brazil",
     "runnerUp": "Sweden",
     "finalScore": "5-2",
-    "thirdPlace": "France"
+    "thirdPlace": "France",
+    "format": "16 teams were divided into four groups. The top two teams from each group advanced to the quarterfinals. Playoffs were used where necessary to resolve tied group positions before the knockout stage."
   },
   {
     "year": 1954,
@@ -141,7 +158,8 @@
     "champion": "West Germany",
     "runnerUp": "Hungary",
     "finalScore": "3-2",
-    "thirdPlace": "Austria"
+    "thirdPlace": "Austria",
+    "format": "16 teams were divided into four groups of four using a seeded format in which not every team played every other team in its group. The top two teams advanced to the quarterfinals, with playoffs used to resolve certain ties."
   },
   {
     "year": 1950,
@@ -149,7 +167,8 @@
     "champion": "Uruguay",
     "runnerUp": "Brazil",
     "finalScore": "2-1 decisive final-round match",
-    "thirdPlace": "Sweden"
+    "thirdPlace": "Sweden",
+    "format": "13 teams were divided into four first-round groups. Each group winner advanced to a four-team final round-robin group. The final-round standings determined the champion, so there was no traditional knockout final."
   },
   {
     "year": 1938,
@@ -157,7 +176,8 @@
     "champion": "Italy",
     "runnerUp": "Hungary",
     "finalScore": "4-2",
-    "thirdPlace": "Brazil"
+    "thirdPlace": "Brazil",
+    "format": "The tournament used a straight single-elimination knockout format from the opening round through the final. Drawn matches were replayed rather than decided by penalty shootouts."
   },
   {
     "year": 1934,
@@ -165,7 +185,8 @@
     "champion": "Italy",
     "runnerUp": "Czechoslovakia",
     "finalScore": "2-1 (AET)",
-    "thirdPlace": "Germany"
+    "thirdPlace": "Germany",
+    "format": "Sixteen teams competed in a straight single-elimination knockout tournament beginning with the Round of 16. There was no group stage."
   },
   {
     "year": 1930,
@@ -173,6 +194,7 @@
     "champion": "Uruguay",
     "runnerUp": "Argentina",
     "finalScore": "4-2",
-    "thirdPlace": "United States"
+    "thirdPlace": "United States",
+    "format": "The 13 teams were divided into four groups: one group of four and three groups of three. Only each group winner advanced, going directly to the semifinals."
   }
 ]

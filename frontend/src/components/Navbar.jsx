@@ -29,6 +29,7 @@ function Navbar() {
   return (
     <nav>
       <Link to="/">Home</Link>
+      <Link to="/world-cup-2026">World Cup 2026</Link>
       <Link to="/teams">Teams</Link>
       <Link to="/players">Players</Link>
       <Link to="/matches">Matches</Link>

@@ -134,6 +134,7 @@ def get_matches():
             "utcDate": match.get("utcDate"),
             "status": match.get("status"),
             "stage": match.get("stage"),
+            "group": match.get("group"),
             "homeTeam": match.get("homeTeam", {}).get("name"),
             "awayTeam": match.get("awayTeam", {}).get("name"),
             "homeCrest": match.get("homeTeam", {}).get("crest"),
@@ -142,6 +143,153 @@ def get_matches():
         })
 
     return formatted_matches
+
+@app.get("/world-cup-2026/groups")
+def get_2026_groups():
+    if not API_KEY:
+        return {"error": "Missing FOOTBALL_API_KEY"}
+
+    response = requests.get(
+        f"{BASE_URL}/competitions/WC/matches",
+        headers={"X-Auth-Token": API_KEY}
+    )
+
+    if response.status_code != 200:
+        return {
+            "error": "Failed to fetch World Cup matches",
+            "status_code": response.status_code,
+            "details": response.text
+        }
+
+    data = response.json()
+    matches = data.get("matches", [])
+
+    group_matches = [
+        match
+        for match in matches
+        if match.get("stage") == "GROUP_STAGE"
+        and match.get("group")
+    ]
+
+    groups = {}
+
+    for match in group_matches:
+        group_name = match.get("group")
+
+        if group_name not in groups:
+            groups[group_name] = {
+                "standings": {},
+                "matches": []
+            }
+
+        home_team = match.get("homeTeam", {}).get("name")
+        away_team = match.get("awayTeam", {}).get("name")
+
+        home_crest = match.get("homeTeam", {}).get("crest")
+        away_crest = match.get("awayTeam", {}).get("crest")
+
+        score = match.get("score", {})
+        full_time = score.get("fullTime", {})
+
+        home_score = full_time.get("home")
+        away_score = full_time.get("away")
+
+        groups[group_name]["matches"].append({
+            "id": match.get("id"),
+            "utcDate": match.get("utcDate"),
+            "status": match.get("status"),
+            "homeTeam": home_team,
+            "awayTeam": away_team,
+            "homeCrest": home_crest,
+            "awayCrest": away_crest,
+            "homeScore": home_score,
+            "awayScore": away_score
+        })
+
+        for team_name, crest in [
+            (home_team, home_crest),
+            (away_team, away_crest)
+        ]:
+            if team_name not in groups[group_name]["standings"]:
+                groups[group_name]["standings"][team_name] = {
+                    "team": team_name,
+                    "crest": crest,
+                    "played": 0,
+                    "wins": 0,
+                    "draws": 0,
+                    "losses": 0,
+                    "goalsFor": 0,
+                    "goalsAgainst": 0,
+                    "goalDifference": 0,
+                    "points": 0
+                }
+
+        if (
+            match.get("status") == "FINISHED"
+            and home_score is not None
+            and away_score is not None
+        ):
+            home = groups[group_name]["standings"][home_team]
+            away = groups[group_name]["standings"][away_team]
+
+            home["played"] += 1
+            away["played"] += 1
+
+            home["goalsFor"] += home_score
+            home["goalsAgainst"] += away_score
+
+            away["goalsFor"] += away_score
+            away["goalsAgainst"] += home_score
+
+            if home_score > away_score:
+                home["wins"] += 1
+                home["points"] += 3
+                away["losses"] += 1
+
+            elif away_score > home_score:
+                away["wins"] += 1
+                away["points"] += 3
+                home["losses"] += 1
+
+            else:
+                home["draws"] += 1
+                away["draws"] += 1
+                home["points"] += 1
+                away["points"] += 1
+
+    formatted_groups = []
+
+    for group_name, group_data in groups.items():
+        standings = list(group_data["standings"].values())
+
+        for team in standings:
+            team["goalDifference"] = (
+                team["goalsFor"] - team["goalsAgainst"]
+            )
+
+        standings.sort(
+            key=lambda team: (
+                team["points"],
+                team["goalDifference"],
+                team["goalsFor"]
+            ),
+            reverse=True
+        )
+
+        for index, team in enumerate(standings):
+            team["position"] = index + 1
+
+        formatted_groups.append({
+            "group": group_name,
+            "standings": standings,
+            "matches": group_data["matches"]
+        })
+
+    formatted_groups.sort(
+        key=lambda item: item["group"]
+    )
+
+    return formatted_groups
 
 @app.get("/world-cup-info")
 def get_world_cup_info():
@@ -185,3 +333,24 @@ def get_historical_matches(year: int):
     ]
 
     return matches
+
+@app.get("/history/{year}/groups")
+def get_historical_group_standings(year: int):
+    standings_file = (
+        Path(__file__).parent
+        / "data"
+        / "world_cup_group_standings.json"
+    )
+
+    with open(standings_file, "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    tournament_id = f"WC-{year}"
+
+    standings = [
+        row
+        for row in data
+        if row.get("tournament_id") == tournament_id
+    ]
+
+    return standings

@@ -44,11 +44,7 @@ function History() {
       <div className="card-grid">
         {worldCupHistory.map((cup) => (
           <div className="card" key={cup.year}>
-            <h2>{cup.year}</h2>
-
-            <p>
-              <strong>Host:</strong> {cup.host}
-            </p>
+            <h2>{cup.host} {cup.year}</h2>
 
             <p>
               <strong>Champion:</strong> {cup.champion}
@@ -56,10 +52,6 @@ function History() {
 
             <p>
               <strong>Runner-up:</strong> {cup.runnerUp}
-            </p>
-
-            <p>
-              <strong>Final Score:</strong> {cup.finalScore}
             </p>
 
             <p>
