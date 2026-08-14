@@ -218,3 +218,4 @@ __marimo__/
 .streamlit/secrets.toml
 
 temp-worldcup/
+backend/data/world_cup_stats_source.json

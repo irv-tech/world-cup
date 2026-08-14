@@ -13,6 +13,7 @@ from models.favorite_player import FavoritePlayer
 from routes import favorites
 import json
 from pathlib import Path
+from copy import deepcopy
 
 Base.metadata.create_all(bind=engine)
 
@@ -354,3 +355,184 @@ def get_historical_group_standings(year: int):
     ]
 
     return standings
+
+@app.get("/stats")
+def get_world_cup_stats():
+    historical_stats_file = (
+        Path(__file__).parent
+        / "data"
+        / "world_cup_stats.json"
+    )
+
+    stats_2026_file = (
+        Path(__file__).parent
+        / "data"
+        / "world_cup_2026_stats.json"
+    )
+
+    with open(
+        historical_stats_file,
+        "r",
+        encoding="utf-8"
+    ) as file:
+        historical_stats = json.load(file)
+
+    with open(
+        stats_2026_file,
+        "r",
+        encoding="utf-8"
+    ) as file:
+        stats_2026 = json.load(file)
+
+    stats = deepcopy(historical_stats)
+
+    # --------------------------------------------------
+    # Normalize team names across historical + 2026 data
+    # --------------------------------------------------
+
+    def normalize_team_name(team_name):
+        aliases = {
+            "West Germany": "Germany",
+            "Czech Republic": "Czechia",
+            "Bosnia and Herzegovina": "Bosnia-Herzegovina",
+        }
+
+        return aliases.get(team_name, team_name)
+
+    # --------------------------------------------------
+    # Existing historical values
+    # --------------------------------------------------
+
+    title_counts = {
+        normalize_team_name(row["team"]): row["count"]
+        for row in stats["titles"]
+    }
+
+    appearance_counts = {
+        normalize_team_name(row["team"]): row["count"]
+        for row in stats["teamAppearances"]
+    }
+
+    goal_counts = {
+        normalize_team_name(row["team"]): row["count"]
+        for row in stats["teamGoals"]
+    }
+
+    # --------------------------------------------------
+    # Add 2026 champion
+    # --------------------------------------------------
+
+    champion = normalize_team_name(
+        stats_2026.get("champion")
+    )
+
+    if champion:
+        title_counts[champion] = (
+            title_counts.get(champion, 0) + 1
+        )
+
+    # --------------------------------------------------
+    # Add 2026 tournament appearances
+    # Each team in the snapshot appeared once in 2026.
+    # --------------------------------------------------
+
+    for team in stats_2026.get("teamStats", []):
+        team_name = normalize_team_name(
+            team.get("team")
+        )
+
+        if not team_name:
+            continue
+
+        appearance_counts[team_name] = (
+            appearance_counts.get(team_name, 0) + 1
+        )
+
+    # --------------------------------------------------
+    # Add 2026 team goals
+    # --------------------------------------------------
+
+    for team in stats_2026.get("teamGoals", []):
+        team_name = normalize_team_name(
+            team.get("team")
+        )
+
+        goals = team.get("goals", 0)
+
+        if not team_name:
+            continue
+
+        goal_counts[team_name] = (
+            goal_counts.get(team_name, 0) + goals
+        )
+
+    # --------------------------------------------------
+    # Rebuild sorted output
+    # --------------------------------------------------
+
+    stats["titles"] = sorted(
+        [
+            {
+                "team": team,
+                "count": count,
+            }
+            for team, count in title_counts.items()
+        ],
+        key=lambda row: (
+            row["count"],
+            row["team"]
+        ),
+        reverse=True,
+    )
+
+    stats["teamAppearances"] = sorted(
+        [
+            {
+                "team": team,
+                "count": count,
+            }
+            for team, count in appearance_counts.items()
+        ],
+        key=lambda row: (
+            row["count"],
+            row["team"]
+        ),
+        reverse=True,
+    )
+
+    stats["teamGoals"] = sorted(
+        [
+            {
+                "team": team,
+                "count": count,
+            }
+            for team, count in goal_counts.items()
+        ],
+        key=lambda row: (
+            row["count"],
+            row["team"]
+        ),
+        reverse=True,
+    )
+
+    # --------------------------------------------------
+    # 2026 snapshot section
+    # --------------------------------------------------
+
+    stats["worldCup2026"] = {
+        "champion": stats_2026.get("champion"),
+        "runnerUp": stats_2026.get("runnerUp"),
+        "thirdPlace": stats_2026.get("thirdPlace"),
+        "metadata": stats_2026.get("metadata", {}),
+        "teamStats": stats_2026.get("teamStats", []),
+        "teamGoals": stats_2026.get("teamGoals", []),
+    }
+
+    # --------------------------------------------------
+    # Coverage metadata
+    # --------------------------------------------------
+
+    stats["metadata"]["teamStatsThrough"] = 2026
+    stats["metadata"]["playerStatsThrough"] = 2022
+
+    return stats

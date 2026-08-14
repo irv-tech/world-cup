@@ -1,0 +1,23 @@
+{
+  "goalIncrements": [
+    { "name": "Kylian Mbappé", "goals": 10 },
+    { "name": "Lionel Messi", "goals": 8 },
+    { "name": "Jude Bellingham", "goals": 7 },
+    { "name": "Erling Haaland", "goals": 7 },
+    { "name": "Ousmane Dembélé", "goals": 6 },
+    { "name": "Harry Kane", "goals": 6 },
+    { "name": "Mikel Oyarzabal", "goals": 5 },
+    { "name": "Ismaïla Sarr", "goals": 4 },
+    { "name": "Julián Quiñones", "goals": 4 },
+    { "name": "Vinícius Júnior", "goals": 4 },
+    { "name": "Cristiano Ronaldo", "goals": 3 }
+  ],
+
+  "appearanceIncrements": [
+    { "name": "Lionel Messi", "appearances": 8 },
+    { "name": "Kylian Mbappé", "appearances": 8 },
+    { "name": "Cristiano Ronaldo", "appearances": 4 },
+    { "name": "Luka Modrić", "appearances": 4 },
+    { "name": "Manuel Neuer", "appearances": 4 }
+]
+}
