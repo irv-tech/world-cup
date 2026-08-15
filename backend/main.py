@@ -46,6 +46,20 @@ app.add_middleware(
 API_KEY = os.getenv("FOOTBALL_API_KEY")
 BASE_URL = "https://api.football-data.org/v4"
 
+def load_platform_data():
+    platform_file = (
+        Path(__file__).parent
+        / "data"
+        / "world_cup_platform.json"
+    )
+
+    with open(
+        platform_file,
+        "r",
+        encoding="utf-8",
+    ) as file:
+        return json.load(file)
+
 @app.get("/")
 def home():
     return {"message": "World Cup backend is running"}
@@ -355,6 +369,104 @@ def get_historical_group_standings(year: int):
     ]
 
     return standings
+
+@app.get("/platform/summary")
+def get_platform_summary():
+    data = load_platform_data()
+
+    return data.get(
+        "summary",
+        {},
+    )
+
+
+@app.get("/platform/teams")
+def get_platform_teams(year: int | None = None):
+    data = load_platform_data()
+
+    teams = list(
+        data.get(
+            "teams",
+            {},
+        ).values()
+    )
+
+    if year is not None:
+        teams = [
+            team
+            for team in teams
+            if year in team.get(
+                "tournaments",
+                [],
+            )
+        ]
+
+    teams.sort(
+        key=lambda team: team.get(
+            "name",
+            "",
+        )
+    )
+
+    return teams
+
+
+@app.get("/platform/teams/{team_id}")
+def get_platform_team(
+    team_id: str,
+    year: int | None = None,
+):
+    data = load_platform_data()
+
+    team = data.get(
+        "teams",
+        {},
+    ).get(team_id)
+
+    if not team:
+        return {
+            "error": "Team not found"
+        }
+
+    available_tournaments = team.get(
+        "tournaments",
+        [],
+    )
+
+    if not available_tournaments:
+        selected_year = None
+
+    elif (
+        year is not None
+        and year in available_tournaments
+    ):
+        selected_year = year
+
+    else:
+        selected_year = max(
+            available_tournaments
+        )
+
+    squad = None
+
+    if selected_year is not None:
+        squad = (
+            data.get(
+                "squads",
+                {},
+            )
+            .get(
+                str(selected_year),
+                {},
+            )
+            .get(team_id)
+        )
+
+    return {
+        **team,
+        "selectedTournament": selected_year,
+        "squad": squad,
+    }
 
 @app.get("/stats")
 def get_world_cup_stats():

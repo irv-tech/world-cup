@@ -55,8 +55,6 @@ function Navbar() {
 
       <Link to="/teams">Teams</Link>
 
-      <Link to="/matches">Matches</Link>
-
       <Link to="/history">History</Link>
 
       <Link to="/stats">Stats</Link>
