@@ -183,6 +183,33 @@ if third_place_match:
             "awayTeam"
         )
 
+# --------------------------------------------------
+# 2026 individual awards
+# --------------------------------------------------
+
+awards = [
+    {
+        "award": "Golden Ball",
+        "player": "Rodri",
+        "team": "Spain",
+    },
+    {
+        "award": "Golden Boot",
+        "player": "Kylian Mbappé",
+        "team": "France",
+        "goals": 10,
+    },
+    {
+        "award": "Golden Glove",
+        "player": "Unai Simón",
+        "team": "Spain",
+    },
+    {
+        "award": "Best Young Player",
+        "player": "Pau Cubarsí",
+        "team": "Spain",
+    },
+]
 
 # --------------------------------------------------
 # Build compact snapshot
@@ -211,6 +238,7 @@ stats = {
     "champion": champion,
     "runnerUp": runner_up,
     "thirdPlace": third_place,
+    "awards": awards,
 
     "teamStats": team_stats,
 

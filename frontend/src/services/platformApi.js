@@ -59,3 +59,23 @@ export async function getPlatformTeam(
 
   return data;
 }
+
+export async function getPlatformTournament(year) {
+  const response = await fetch(
+    `${API_BASE_URL}/platform/tournaments/${year}`
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      "Failed to load tournament data."
+    );
+  }
+
+  const data = await response.json();
+
+  if (data.error) {
+    throw new Error(data.error);
+  }
+
+  return data;
+}

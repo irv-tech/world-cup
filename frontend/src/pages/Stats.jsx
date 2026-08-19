@@ -1,25 +1,67 @@
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
 
 function Stats() {
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [
+    stats,
+    setStats,
+  ] = useState(null);
+
+  const [
+    loading,
+    setLoading,
+  ] = useState(true);
+
+  const [
+    error,
+    setError,
+  ] = useState("");
+
 
   useEffect(() => {
     async function loadStats() {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}/stats`
-        );
+        setLoading(true);
+        setError("");
 
-        const data = await response.json();
+        const response =
+          await fetch(
+            `${import.meta.env.VITE_API_BASE_URL}/stats`
+          );
+
+        const data =
+          await response.json();
 
         if (!response.ok) {
-          throw new Error("Failed to load World Cup stats");
+          throw new Error(
+            "Failed to load World Cup statistics."
+          );
+        }
+
+        if (
+          !data ||
+          typeof data !== "object"
+        ) {
+          throw new Error(
+            "Unexpected statistics data returned by the server."
+          );
         }
 
         setStats(data);
       } catch (error) {
-        console.error("Stats API error:", error);
+        console.error(
+          "Stats API error:",
+          error
+        );
+
+        setError(
+          error.message ||
+            "Unable to load World Cup statistics."
+        );
       } finally {
         setLoading(false);
       }
@@ -28,32 +70,65 @@ function Stats() {
     loadStats();
   }, []);
 
-  const topTitles = useMemo(
-    () => stats?.titles?.slice(0, 10) || [],
-    [stats]
-  );
 
-  const topAppearances = useMemo(
-    () => stats?.teamAppearances?.slice(0, 10) || [],
-    [stats]
-  );
+  const topTitles =
+    useMemo(
+      () =>
+        stats?.titles?.slice(
+          0,
+          10
+        ) || [],
+      [stats]
+    );
 
-  const topTeamGoals = useMemo(
-    () => stats?.teamGoals?.slice(0, 10) || [],
-    [stats]
-  );
 
-  const topScorers = useMemo(
-    () => stats?.topScorers?.slice(0, 10) || [],
-    [stats]
-  );
+  const topAppearances =
+    useMemo(
+      () =>
+        stats?.teamAppearances?.slice(
+          0,
+          10
+        ) || [],
+      [stats]
+    );
 
-  const topPlayerAppearances = useMemo(
-    () => stats?.playerAppearances?.slice(0, 10) || [],
-    [stats]
-  );
 
-  function getFlagUrl(teamName) {
+  const topTeamGoals =
+    useMemo(
+      () =>
+        stats?.teamGoals?.slice(
+          0,
+          10
+        ) || [],
+      [stats]
+    );
+
+
+  const topScorers =
+    useMemo(
+      () =>
+        stats?.topScorers?.slice(
+          0,
+          10
+        ) || [],
+      [stats]
+    );
+
+
+  const topPlayerAppearances =
+    useMemo(
+      () =>
+        stats?.playerAppearances?.slice(
+          0,
+          10
+        ) || [],
+      [stats]
+    );
+
+
+  function getFlagUrl(
+    teamName
+  ) {
     const countryCodes = {
       Algeria: "dz",
       Argentina: "ar",
@@ -108,25 +183,36 @@ function Stats() {
       Uzbekistan: "uz",
       Qatar: "qa",
 
-      // Historical visual fallbacks
       Yugoslavia: "rs",
       Czechoslovakia: "cz",
       "Soviet Union": "ru",
       Scotland: "gb-sct",
       Wales: "gb-wls",
-      "Northern Ireland": "gb-nir",
-      "Republic of Ireland": "ie",
+      "Northern Ireland":
+        "gb-nir",
+      "Republic of Ireland":
+        "ie",
       "West Germany": "de",
     };
 
-    const code = countryCodes[teamName];
+
+    const code =
+      countryCodes[
+        teamName
+      ];
+
 
     if (!code) {
       return null;
     }
 
-    return `https://flagcdn.com/${code}.svg`;
+
+    return (
+      `https://flagcdn.com/` +
+      `${code}.svg`
+    );
   }
+
 
   function RankingList({
     title,
@@ -136,110 +222,238 @@ function Stats() {
     teamMode = false,
     playerMode = false,
   }) {
-    const maxValue = items.length
-      ? Math.max(...items.map((item) => item[valueKey]))
-      : 1;
+    const maxValue =
+      items.length > 0
+        ? Math.max(
+            ...items.map(
+              (item) =>
+                Number(
+                  item[
+                    valueKey
+                  ]
+                ) || 0
+            )
+          )
+        : 1;
+
 
     return (
       <section className="stats-panel">
-        <h2>{title}</h2>
+        <h2>
+          {title}
+        </h2>
 
-        <div className="stats-ranking-list">
-          {items.map((item, index) => {
-            const label = teamMode
-              ? item.team
-              : item.name;
 
-            let flagLookup = null;
+        {items.length === 0 ? (
+          <p className="stats-empty">
+            No ranking data available.
+          </p>
+        ) : (
+          <div className="stats-ranking-list">
+            {items.map(
+              (
+                item,
+                index
+              ) => {
+                const label =
+                  teamMode
+                    ? item.team
+                    : item.name;
 
-            if (teamMode) {
-              flagLookup = item.team;
-            }
 
-            if (playerMode) {
-              flagLookup = item.country;
-            }
+                let flagLookup =
+                  null;
 
-            const flagUrl = flagLookup
-              ? getFlagUrl(flagLookup)
-              : null;
 
-            const value = item[valueKey];
+                if (teamMode) {
+                  flagLookup =
+                    item.team;
+                }
 
-            return (
-              <div
-                className="stats-ranking-row"
-                key={`${label}-${index}`}
-              >
-                <div className="stats-rank">
-                  {index + 1}
-                </div>
 
-                <div className="stats-ranking-content">
-                  <div className="stats-ranking-header">
-                    <div className="stats-ranking-name">
-                      {flagUrl && (
-                        <img
-                          src={flagUrl}
-                          alt=""
-                          className="standings-crest"
-                        />
-                      )}
+                if (playerMode) {
+                  flagLookup =
+                    item.country;
+                }
 
-                      <span>{label}</span>
+
+                const flagUrl =
+                  flagLookup
+                    ? getFlagUrl(
+                        flagLookup
+                      )
+                    : null;
+
+
+                const value =
+                  Number(
+                    item[
+                      valueKey
+                    ]
+                  ) || 0;
+
+
+                const barWidth =
+                  maxValue > 0
+                    ? (
+                        value /
+                        maxValue
+                      ) *
+                      100
+                    : 0;
+
+
+                return (
+                  <div
+                    className="stats-ranking-row"
+                    key={
+                      `${label}-${index}`
+                    }
+                  >
+                    <div className="stats-rank">
+                      {
+                        index +
+                        1
+                      }
                     </div>
 
-                    <strong>
-                      {value} {valueLabel}
-                    </strong>
-                  </div>
 
-                  <div className="stats-bar-track">
-                    <div
-                      className="stats-bar-fill"
-                      style={{
-                        width: `${(value / maxValue) * 100}%`,
-                      }}
-                    />
+                    <div className="stats-ranking-content">
+                      <div className="stats-ranking-header">
+                        <div className="stats-ranking-name">
+                          {flagUrl && (
+                            <img
+                              src={
+                                flagUrl
+                              }
+                              alt=""
+                              className="standings-crest"
+                            />
+                          )}
+
+                          <span>
+                            {
+                              label
+                            }
+                          </span>
+                        </div>
+
+
+                        <strong>
+                          {
+                            value
+                          }{" "}
+                          {
+                            valueLabel
+                          }
+                        </strong>
+                      </div>
+
+
+                      <div className="stats-bar-track">
+                        <div
+                          className="stats-bar-fill"
+                          style={{
+                            width:
+                              `${barWidth}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                );
+              }
+            )}
+          </div>
+        )}
       </section>
     );
   }
 
+
   if (loading) {
     return (
       <div className="page-container">
-        <h1>Loading World Cup statistics...</h1>
+        <div className="stats-page-header">
+          <p className="section-eyebrow">
+            All-Time Records
+          </p>
+
+          <h1>
+            World Cup Statistics
+          </h1>
+
+          <p>
+            Loading World Cup
+            statistics...
+          </p>
+        </div>
       </div>
     );
   }
 
-  if (!stats) {
+
+  if (
+    error ||
+    !stats
+  ) {
     return (
       <div className="page-container">
-        <h1>World Cup statistics unavailable.</h1>
+        <div className="stats-page-header">
+          <p className="section-eyebrow">
+            All-Time Records
+          </p>
+
+          <h1>
+            World Cup Statistics
+          </h1>
+
+          <p>
+            FIFA Men's World Cup
+            records and rankings.
+          </p>
+        </div>
+
+
+        <div className="stats-error">
+          <strong>
+            Unable to load
+            statistics.
+          </strong>
+
+          <p>
+            {error ||
+              "Statistics data is unavailable."}
+          </p>
+        </div>
       </div>
     );
   }
+
 
   return (
     <div className="page-container">
       <div className="stats-page-header">
-        <h1>World Cup Statistics</h1>
+        <p className="section-eyebrow">
+          All-Time Records
+        </p>
+
+        <h1>
+          World Cup Statistics
+        </h1>
 
         <p>
-          All-time FIFA Men's World Cup records
+          All-time FIFA Men's
+          World Cup team and player
+          records.
         </p>
       </div>
+
 
       <h2 className="stats-section-title">
         All-Time Team Records
       </h2>
+
 
       <div className="stats-grid">
         <RankingList
@@ -250,6 +464,7 @@ function Stats() {
           teamMode
         />
 
+
         <RankingList
           title="Most World Cup Appearances"
           items={topAppearances}
@@ -257,6 +472,7 @@ function Stats() {
           valueLabel="appearances"
           teamMode
         />
+
 
         <RankingList
           title="Most World Cup Goals"
@@ -267,9 +483,11 @@ function Stats() {
         />
       </div>
 
+
       <h2 className="stats-section-title">
         All-Time Player Records
       </h2>
+
 
       <div className="stats-grid stats-grid-two">
         <RankingList
@@ -280,9 +498,12 @@ function Stats() {
           playerMode
         />
 
+
         <RankingList
           title="Most Match Appearances"
-          items={topPlayerAppearances}
+          items={
+            topPlayerAppearances
+          }
           valueKey="appearances"
           valueLabel="matches"
           playerMode
@@ -291,5 +512,6 @@ function Stats() {
     </div>
   );
 }
+
 
 export default Stats;

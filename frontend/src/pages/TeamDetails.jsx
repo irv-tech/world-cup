@@ -116,23 +116,17 @@ const countryCodes = {
 
 
 function getFlagUrl(teamName) {
-  const code =
-    countryCodes[teamName];
+  const code = countryCodes[teamName];
 
   if (!code) {
     return null;
   }
 
-  return (
-    `https://flagcdn.com/` +
-    `${code}.svg`
-  );
+  return `https://flagcdn.com/${code}.svg`;
 }
 
 
-function formatJerseyNumber(
-  jerseyNumber
-) {
+function formatJerseyNumber(jerseyNumber) {
   if (
     jerseyNumber === null ||
     jerseyNumber === undefined ||
@@ -145,54 +139,35 @@ function formatJerseyNumber(
 }
 
 
-function getBestTopScorer(
-  teams
-) {
-  const candidates =
-    teams
-      .map(
-        (team) =>
-          team.allTimeTopScorer
-      )
-      .filter(Boolean);
+function getBestTopScorer(teams) {
+  const candidates = teams
+    .map((team) => team.allTimeTopScorer)
+    .filter(Boolean);
 
-
-  if (
-    candidates.length === 0
-  ) {
+  if (candidates.length === 0) {
     return null;
   }
 
-
   return candidates.reduce(
     (best, current) =>
-      current.goals >
-      best.goals
+      current.goals > best.goals
         ? current
         : best
   );
 }
 
 
-function getBestAppearanceLeader(
-  teams
-) {
-  const candidates =
-    teams
-      .map(
-        (team) =>
-          team
-            .allTimeMostAppearances
-      )
-      .filter(Boolean);
+function getBestAppearanceLeader(teams) {
+  const candidates = teams
+    .map(
+      (team) =>
+        team.allTimeMostAppearances
+    )
+    .filter(Boolean);
 
-
-  if (
-    candidates.length === 0
-  ) {
+  if (candidates.length === 0) {
     return null;
   }
-
 
   return candidates.reduce(
     (best, current) =>
@@ -201,6 +176,97 @@ function getBestAppearanceLeader(
         ? current
         : best
   );
+}
+
+
+function normalize2026TeamName(teamName) {
+  const aliases = {
+    "Bosnia and Herzegovina":
+      "Bosnia-Herzegovina",
+
+    "Czech Republic":
+      "Czechia",
+
+    "Cape Verde Islands":
+      "Cape Verde",
+
+    "Congo DR":
+      "DR Congo",
+  };
+
+  return aliases[teamName] || teamName;
+}
+
+
+function build2026Squad(squadData) {
+  const groupedSquad = {
+    goalkeepers: [],
+    defenders: [],
+    midfielders: [],
+    forwards: [],
+    other: [],
+  };
+
+  const players =
+    squadData?.squad || [];
+
+  players.forEach((player) => {
+    let group = "other";
+
+    const position =
+      (
+        player.position ||
+        ""
+      ).toLowerCase();
+
+    if (
+      position.includes(
+        "goalkeeper"
+      )
+    ) {
+      group = "goalkeepers";
+    } else if (
+      position.includes("defence") ||
+      position.includes("defender")
+    ) {
+      group = "defenders";
+    } else if (
+      position.includes("midfield")
+    ) {
+      group = "midfielders";
+    } else if (
+      position.includes("offence") ||
+      position.includes("forward") ||
+      position.includes("striker")
+    ) {
+      group = "forwards";
+    }
+
+    groupedSquad[group].push({
+      playerId:
+        `FD-${player.externalPlayerId}`,
+
+      externalPlayerId:
+        player.externalPlayerId,
+
+      name:
+        player.name,
+
+      position:
+        player.position,
+
+      dateOfBirth:
+        player.dateOfBirth,
+
+      nationality:
+        player.nationality,
+
+      jerseyNumber:
+        null,
+    });
+  });
+
+  return groupedSquad;
 }
 
 
@@ -214,7 +280,6 @@ function TeamDetails() {
   const [searchParams] =
     useSearchParams();
 
-
   const yearFromUrl =
     searchParams.get("year");
 
@@ -222,7 +287,6 @@ function TeamDetails() {
     searchParams.get(
       "identity"
     );
-
 
   const [
     team,
@@ -266,10 +330,8 @@ function TeamDetails() {
         setLoading(true);
         setError("");
 
-
         const allTeams =
           await getPlatformTeams();
-
 
         const routeTeam =
           allTeams.find(
@@ -277,19 +339,16 @@ function TeamDetails() {
               item.teamId === id
           );
 
-
         if (!routeTeam) {
           throw new Error(
             "Team not found."
           );
         }
 
-
         const lineage =
           findTeamLineage(
             routeTeam.name
           );
-
 
         const resolvedLineageTeams =
           lineage
@@ -299,12 +358,10 @@ function TeamDetails() {
               )
             : [routeTeam];
 
-
         const resolvedCanonicalName =
           lineage
             ? lineage.canonicalName
             : routeTeam.name;
-
 
         const editionOptions =
           buildEditionOptions(
@@ -312,24 +369,18 @@ function TeamDetails() {
             resolvedCanonicalName
           );
 
-
         if (
-          editionOptions.length ===
-          0
+          editionOptions.length === 0
         ) {
           throw new Error(
             "No World Cup editions found for this team."
           );
         }
 
-
         const requestedYear =
           yearFromUrl
-            ? Number(
-                yearFromUrl
-              )
+            ? Number(yearFromUrl)
             : null;
-
 
         const edition =
           resolveEditionOption(
@@ -338,20 +389,116 @@ function TeamDetails() {
             identityFromUrl
           );
 
-
         if (!edition) {
           throw new Error(
             "Unable to resolve tournament edition."
           );
         }
 
-
-        const detailedTeam =
+        let detailedTeam =
           await getPlatformTeam(
             edition.teamId,
             edition.year
           );
 
+        /*
+         * Historical squads already come
+         * from world_cup_platform.json.
+         *
+         * For 2026, bridge the platform
+         * identity to football-data.org.
+         */
+        if (
+          edition.year === 2026
+        ) {
+          try {
+            const teamsResponse =
+              await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/teams`
+              );
+
+            if (
+              !teamsResponse.ok
+            ) {
+              throw new Error(
+                "Failed to load 2026 team list."
+              );
+            }
+
+            const externalTeams =
+              await teamsResponse.json();
+
+            const externalTeamName =
+              normalize2026TeamName(
+                edition.identityName
+              );
+
+            const externalTeam =
+              externalTeams.find(
+                (item) =>
+                  item.name ===
+                  externalTeamName
+              );
+
+            if (!externalTeam) {
+              throw new Error(
+                `No 2026 squad mapping found for ${edition.identityName}.`
+              );
+            }
+
+            const squadResponse =
+              await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/teams/${externalTeam.id}/squad`
+              );
+
+            if (
+              !squadResponse.ok
+            ) {
+              throw new Error(
+                "Failed to load 2026 squad."
+              );
+            }
+
+            const squadData =
+              await squadResponse.json();
+
+            if (
+              squadData.error
+            ) {
+              throw new Error(
+                squadData.error
+              );
+            }
+
+            detailedTeam = {
+              ...detailedTeam,
+
+              squad:
+                build2026Squad(
+                  squadData
+                ),
+
+              squadSource:
+                "football-data.org",
+
+              externalTeamId:
+                squadData.externalTeamId,
+
+              squadCrest:
+                squadData.crest,
+
+              coach:
+                squadData.coach,
+            };
+          } catch (
+            squadError
+          ) {
+            console.error(
+              "2026 squad API error:",
+              squadError
+            );
+          }
+        }
 
         setTeam(
           detailedTeam
@@ -378,7 +525,6 @@ function TeamDetails() {
           err
         );
 
-
         setError(
           err.message ||
             "Unable to load team details."
@@ -387,7 +533,6 @@ function TeamDetails() {
         setLoading(false);
       }
     }
-
 
     loadTeam();
   }, [
@@ -404,7 +549,6 @@ function TeamDetails() {
       ) {
         return [];
       }
-
 
       return buildEditionOptions(
         lineageTeams,
@@ -459,13 +603,11 @@ function TeamDetails() {
     const selectedValue =
       event.target.value;
 
-
     const [
       yearValue,
       identityId,
     ] =
       selectedValue.split("|");
-
 
     navigate(
       `/teams/${id}` +
@@ -505,11 +647,9 @@ function TeamDetails() {
           null,
       };
 
-
       await addFavoritePlayer(
         favoritePlayer
       );
-
 
       alert(
         `${player.name} added to favorites`
@@ -538,7 +678,9 @@ function TeamDetails() {
           Team Details
         </h1>
 
-        <p>{error}</p>
+        <p>
+          {error}
+        </p>
       </div>
     );
   }
@@ -581,17 +723,14 @@ function TeamDetails() {
       key: "goalkeepers",
       title: "Goalkeepers",
     },
-
     {
       key: "defenders",
       title: "Defenders",
     },
-
     {
       key: "midfielders",
       title: "Midfielders",
     },
-
     {
       key: "forwards",
       title: "Forwards",
@@ -657,7 +796,9 @@ function TeamDetails() {
                 "World Cup championships"
               }
             >
-              {championshipStars}
+              {
+                championshipStars
+              }
             </div>
           )}
 
@@ -681,13 +822,11 @@ function TeamDetails() {
             All-Time Top Scorer
           </span>
 
-
           <strong>
             {allTimeTopScorer
               ?.name ||
               "Not available"}
           </strong>
-
 
           {allTimeTopScorer && (
             <p>
@@ -710,13 +849,11 @@ function TeamDetails() {
             Appearances
           </span>
 
-
           <strong>
             {allTimeAppearanceLeader
               ?.name ||
               "Not available"}
           </strong>
-
 
           {allTimeAppearanceLeader && (
             <p>
@@ -769,7 +906,9 @@ function TeamDetails() {
                     `${option.teamId}`
                   }
                 >
-                  {option.label}
+                  {
+                    option.label
+                  }
                 </option>
               )
             )}
@@ -803,14 +942,12 @@ function TeamDetails() {
                     group.key
                   ] || [];
 
-
                 if (
                   players.length ===
                   0
                 ) {
                   return null;
                 }
-
 
                 return (
                   <section
@@ -849,6 +986,37 @@ function TeamDetails() {
                             </h4>
 
 
+                            {player.position && (
+                              <p className="player-squad-position">
+                                {
+                                  player.position
+                                }
+                              </p>
+                            )}
+
+
+                            {player.dateOfBirth && (
+                              <p className="player-squad-dob">
+                                <strong>
+                                  Born:
+                                </strong>{" "}
+                                {new Date(
+                                  `${player.dateOfBirth}T00:00:00`
+                                ).toLocaleDateString(
+                                  undefined,
+                                  {
+                                    year:
+                                      "numeric",
+                                    month:
+                                      "short",
+                                    day:
+                                      "numeric",
+                                  }
+                                )}
+                              </p>
+                            )}
+
+
                             <button
                               type="button"
                               onClick={() =>
@@ -857,8 +1025,7 @@ function TeamDetails() {
                                 )
                               }
                             >
-                              Add Player to
-                              Favorites
+                              Add Player to Favorites
                             </button>
                           </div>
                         )

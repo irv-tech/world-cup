@@ -1,89 +1,190 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {
+  NavLink,
+  useNavigate,
+} from "react-router-dom";
+
+import {
+  useEffect,
+  useState,
+} from "react";
+
 
 function Navbar() {
-  const [username, setUsername] = useState(
-    localStorage.getItem("username")
+  const navigate =
+    useNavigate();
+
+  const [
+    username,
+    setUsername,
+  ] = useState(
+    localStorage.getItem(
+      "username"
+    )
   );
 
+
   useEffect(() => {
-    function handleStorageChange() {
-      setUsername(localStorage.getItem("username"));
+    function handleAuthChange() {
+      setUsername(
+        localStorage.getItem(
+          "username"
+        )
+      );
     }
 
     window.addEventListener(
       "storage",
-      handleStorageChange
+      handleAuthChange
     );
 
     window.addEventListener(
       "authChange",
-      handleStorageChange
+      handleAuthChange
     );
 
     return () => {
       window.removeEventListener(
         "storage",
-        handleStorageChange
+        handleAuthChange
       );
 
       window.removeEventListener(
         "authChange",
-        handleStorageChange
+        handleAuthChange
       );
     };
   }, []);
 
+
   function handleLogout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    localStorage.removeItem(
+      "token"
+    );
+
+    localStorage.removeItem(
+      "username"
+    );
 
     setUsername(null);
 
     window.dispatchEvent(
-      new Event("authChange")
+      new Event(
+        "authChange"
+      )
     );
+
+    navigate("/");
   }
 
+
+  function getNavLinkClass({
+    isActive,
+  }) {
+    return isActive
+      ? "nav-link active"
+      : "nav-link";
+  }
+
+
   return (
-    <nav>
-      <Link to="/">Home</Link>
+    <nav className="main-navbar">
+      <div className="nav-left">
+        <NavLink
+          to="/"
+          className="nav-brand"
+        >
+          World Cup Platform
+        </NavLink>
 
-      <Link to="/world-cup-2026">
-        World Cup 2026
-      </Link>
 
-      <Link to="/teams">Teams</Link>
+        <NavLink
+          to="/"
+          className={getNavLinkClass}
+        >
+          Home
+        </NavLink>
 
-      <Link to="/history">History</Link>
 
-      <Link to="/stats">Stats</Link>
+        <NavLink
+          to="/world-cup-2026"
+          className={getNavLinkClass}
+        >
+          World Cup 2026
+        </NavLink>
 
-      {username ? (
-        <>
-          <span className="nav-user">
-            Logged in as {username}
-          </span>
 
-          <Link to="/dashboard">
-            Dashboard
-          </Link>
+        <NavLink
+          to="/teams"
+          className={getNavLinkClass}
+        >
+          Teams
+        </NavLink>
 
-          <button onClick={handleLogout}>
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          <Link to="/login">Login</Link>
 
-          <Link to="/register">
-            Register
-          </Link>
-        </>
-      )}
+        <NavLink
+          to="/history"
+          className={getNavLinkClass}
+        >
+          History
+        </NavLink>
+
+
+        <NavLink
+          to="/stats"
+          className={getNavLinkClass}
+        >
+          Stats
+        </NavLink>
+      </div>
+
+
+      <div className="nav-right">
+        {username ? (
+          <>
+            <NavLink
+              to="/my-world-cup"
+              className={
+                getNavLinkClass
+              }
+            >
+              My World Cup
+            </NavLink>
+
+
+            <button
+              type="button"
+              className="nav-logout-button"
+              onClick={
+                handleLogout
+              }
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <NavLink
+              to="/login"
+              className={
+                getNavLinkClass
+              }
+            >
+              Login
+            </NavLink>
+
+
+            <NavLink
+              to="/register"
+              className="nav-register-button"
+            >
+              Register
+            </NavLink>
+          </>
+        )}
+      </div>
     </nav>
   );
 }
+
 
 export default Navbar;

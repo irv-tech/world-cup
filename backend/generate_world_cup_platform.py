@@ -600,6 +600,33 @@ for team_id, team in team_master.items():
     else:
         team["allTimeMostAppearances"] = None
 
+# ---------------------------------------------------------
+# Historical goals by tournament and player
+# Used for Golden Boot / Golden Shoe awards
+# ---------------------------------------------------------
+
+goals_by_tournament_player = defaultdict(
+    lambda: defaultdict(int)
+)
+
+for row in goals_source:
+    tournament_id = row.get("tournament_id")
+    player_id = row.get("player_id")
+
+    if tournament_id not in mens_tournament_ids:
+        continue
+
+    if not player_id:
+        continue
+
+    # Own goals do not count toward a player's
+    # Golden Boot total.
+    if row.get("own_goal"):
+        continue
+
+    goals_by_tournament_player[
+        tournament_id
+    ][player_id] += 1
 
 # ---------------------------------------------------------
 # Historical awards
@@ -608,32 +635,84 @@ for team_id, team in team_master.items():
 awards_by_tournament = defaultdict(list)
 
 for row in award_winners_source:
-    tournament_id = row.get("tournament_id")
+    tournament_id = row.get(
+        "tournament_id"
+    )
 
     if tournament_id not in mens_tournament_ids:
         continue
 
-    year = get_year(tournament_id)
+    year = get_year(
+        tournament_id
+    )
 
     if year is None:
         continue
 
-    awards_by_tournament[str(year)].append(
-        {
-            "awardId": row.get("award_id"),
-            "award": row.get("award_name"),
-            "playerId": row.get("player_id"),
-            "player": clean_name(
-                row.get("given_name"),
-                row.get("family_name"),
-            ),
-            "teamId": row.get("team_id"),
-            "team": row.get("team_name"),
-            "teamCode": row.get("team_code"),
-            "shared": bool(row.get("shared")),
-        }
+    award_name = (
+        row.get("award_name")
+        or ""
     )
 
+    player_id = row.get(
+        "player_id"
+    )
+
+    award_name_lower = (
+        award_name.lower()
+    )
+
+    is_top_scorer_award = (
+        "golden boot" in award_name_lower
+        or "golden shoe" in award_name_lower
+    )
+
+    goals = None
+
+    if (
+        is_top_scorer_award
+        and player_id
+    ):
+        goals = (
+            goals_by_tournament_player[
+                tournament_id
+            ].get(
+                player_id
+            )
+        )
+
+    awards_by_tournament[
+        str(year)
+    ].append(
+        {
+            "awardId": row.get(
+                "award_id"
+            ),
+            "award": award_name,
+            "playerId": player_id,
+            "player": clean_name(
+                row.get(
+                    "given_name"
+                ),
+                row.get(
+                    "family_name"
+                ),
+            ),
+            "teamId": row.get(
+                "team_id"
+            ),
+            "team": row.get(
+                "team_name"
+            ),
+            "teamCode": row.get(
+                "team_code"
+            ),
+            "shared": bool(
+                row.get("shared")
+            ),
+            "goals": goals,
+        }
+    )
 
 # ---------------------------------------------------------
 # Historical match / goal totals
@@ -862,6 +941,43 @@ if stats_2026:
         third_place_name
     )
 
+# ---------------------------------------------------------
+# 2026 individual awards
+# ---------------------------------------------------------
+
+awards_2026 = []
+
+for row in stats_2026.get("awards", []):
+    team_name = normalize_team_name(
+        row.get("team")
+    )
+
+    team_id = None
+    team_code = None
+
+    if team_name:
+        team_id = get_or_create_team(
+            team_name
+        )
+
+        team_code = team_master[
+            team_id
+        ].get("code")
+
+    awards_2026.append(
+        {
+            "awardId": None,
+            "award": row.get("award"),
+            "playerId": row.get("playerId"),
+            "player": row.get("player"),
+            "teamId": team_id,
+            "team": team_name,
+            "teamCode": team_code,
+            "shared": False,
+            "goals": row.get("goals"),
+        }
+    )    
+
 
     if champion_2026:
         champion_team = team_master[
@@ -912,7 +1028,7 @@ if stats_2026:
 
         "teams": teams_2026,
 
-        "awards": [],
+        "awards": awards_2026,
     }
 
 

@@ -99,7 +99,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": 8
         },
         {
           "awardId": "A-5",
@@ -109,7 +110,8 @@
           "teamId": "T-84",
           "team": "Uruguay",
           "teamCode": "URY",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -119,7 +121,8 @@
           "teamId": "T-83",
           "team": "United States",
           "teamCode": "USA",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -231,7 +234,8 @@
           "teamId": "T-21",
           "team": "Czechoslovakia",
           "teamCode": "CSK",
-          "shared": false
+          "shared": false,
+          "goals": 5
         },
         {
           "awardId": "A-5",
@@ -241,7 +245,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -251,7 +256,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": true
+          "shared": true,
+          "goals": null
         }
       ]
     },
@@ -358,7 +364,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": 7
         },
         {
           "awardId": "A-5",
@@ -368,7 +375,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -378,7 +386,8 @@
           "teamId": "T-36",
           "team": "Hungary",
           "teamCode": "HUN",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -388,7 +397,8 @@
           "teamId": "T-36",
           "team": "Hungary",
           "teamCode": "HUN",
-          "shared": true
+          "shared": true,
+          "goals": null
         }
       ]
     },
@@ -485,7 +495,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": 9
         },
         {
           "awardId": "A-5",
@@ -495,7 +506,8 @@
           "teamId": "T-84",
           "team": "Uruguay",
           "teamCode": "URY",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -505,7 +517,8 @@
           "teamId": "T-73",
           "team": "Spain",
           "teamCode": "ESP",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -515,7 +528,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -525,7 +539,8 @@
           "teamId": "T-84",
           "team": "Uruguay",
           "teamCode": "URY",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -535,7 +550,8 @@
           "teamId": "T-73",
           "team": "Spain",
           "teamCode": "ESP",
-          "shared": true
+          "shared": true,
+          "goals": null
         }
       ]
     },
@@ -647,7 +663,8 @@
           "teamId": "T-36",
           "team": "Hungary",
           "teamCode": "HUN",
-          "shared": false
+          "shared": false,
+          "goals": 11
         },
         {
           "awardId": "A-5",
@@ -657,7 +674,8 @@
           "teamId": "T-75",
           "team": "Switzerland",
           "teamCode": "CHE",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -667,7 +685,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -677,7 +696,8 @@
           "teamId": "T-05",
           "team": "Austria",
           "teamCode": "AUT",
-          "shared": true
+          "shared": true,
+          "goals": null
         }
       ]
     },
@@ -789,7 +809,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": 13
         },
         {
           "awardId": "A-5",
@@ -799,7 +820,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -809,7 +831,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -819,7 +842,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -931,7 +955,8 @@
           "teamId": "T-36",
           "team": "Hungary",
           "teamCode": "HUN",
-          "shared": true
+          "shared": true,
+          "goals": 4
         },
         {
           "awardId": "A-4",
@@ -941,7 +966,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": true
+          "shared": true,
+          "goals": 4
         },
         {
           "awardId": "A-4",
@@ -951,7 +977,8 @@
           "teamId": "T-72",
           "team": "Soviet Union",
           "teamCode": "SUN",
-          "shared": true
+          "shared": true,
+          "goals": 4
         },
         {
           "awardId": "A-4",
@@ -961,7 +988,8 @@
           "teamId": "T-87",
           "team": "Yugoslavia",
           "teamCode": "YUG",
-          "shared": true
+          "shared": true,
+          "goals": 4
         },
         {
           "awardId": "A-4",
@@ -971,7 +999,8 @@
           "teamId": "T-13",
           "team": "Chile",
           "teamCode": "CHL",
-          "shared": true
+          "shared": true,
+          "goals": 4
         },
         {
           "awardId": "A-4",
@@ -981,7 +1010,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": true
+          "shared": true,
+          "goals": 4
         },
         {
           "awardId": "A-8",
@@ -991,7 +1021,8 @@
           "teamId": "T-36",
           "team": "Hungary",
           "teamCode": "HUN",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -1103,7 +1134,8 @@
           "teamId": "T-58",
           "team": "Portugal",
           "teamCode": "PRT",
-          "shared": false
+          "shared": false,
+          "goals": 9
         },
         {
           "awardId": "A-5",
@@ -1113,7 +1145,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -1123,7 +1156,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -1133,7 +1167,8 @@
           "teamId": "T-36",
           "team": "Hungary",
           "teamCode": "HUN",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -1143,7 +1178,8 @@
           "teamId": "T-28",
           "team": "England",
           "teamCode": "ENG",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -1153,7 +1189,8 @@
           "teamId": "T-72",
           "team": "Soviet Union",
           "teamCode": "SUN",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -1163,7 +1200,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -1275,7 +1313,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": 10
         },
         {
           "awardId": "A-5",
@@ -1285,7 +1324,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -1295,7 +1335,8 @@
           "teamId": "T-56",
           "team": "Peru",
           "teamCode": "PER",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -1305,7 +1346,8 @@
           "teamId": "T-56",
           "team": "Peru",
           "teamCode": "PER",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -1417,7 +1459,8 @@
           "teamId": "T-57",
           "team": "Poland",
           "teamCode": "POL",
-          "shared": false
+          "shared": false,
+          "goals": 7
         },
         {
           "awardId": "A-5",
@@ -1427,7 +1470,8 @@
           "teamId": "T-48",
           "team": "Netherlands",
           "teamCode": "NLD",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -1437,7 +1481,8 @@
           "teamId": "T-57",
           "team": "Poland",
           "teamCode": "POL",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -1447,7 +1492,8 @@
           "teamId": "T-57",
           "team": "Poland",
           "teamCode": "POL",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -1559,7 +1605,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -1569,7 +1616,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -1579,7 +1627,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -1589,7 +1638,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": 6
         },
         {
           "awardId": "A-5",
@@ -1599,7 +1649,8 @@
           "teamId": "T-56",
           "team": "Peru",
           "teamCode": "PER",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -1609,7 +1660,8 @@
           "teamId": "T-48",
           "team": "Netherlands",
           "teamCode": "NLD",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -1619,7 +1671,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -1771,7 +1824,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -1781,7 +1835,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -1791,7 +1846,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -1801,7 +1857,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": 6
         },
         {
           "awardId": "A-5",
@@ -1811,7 +1868,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -1821,7 +1879,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -1831,7 +1890,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -1983,7 +2043,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -1993,7 +2054,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -2003,7 +2065,8 @@
           "teamId": "T-22",
           "team": "Denmark",
           "teamCode": "DNK",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -2013,7 +2076,8 @@
           "teamId": "T-28",
           "team": "England",
           "teamCode": "ENG",
-          "shared": false
+          "shared": false,
+          "goals": 6
         },
         {
           "awardId": "A-5",
@@ -2023,7 +2087,8 @@
           "teamId": "T-73",
           "team": "Spain",
           "teamCode": "ESP",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -2033,7 +2098,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -2043,7 +2109,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -2053,7 +2120,8 @@
           "teamId": "T-06",
           "team": "Belgium",
           "teamCode": "BEL",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -2205,7 +2273,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -2215,7 +2284,8 @@
           "teamId": "T-86",
           "team": "West Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -2225,7 +2295,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -2235,7 +2306,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": 6
         },
         {
           "awardId": "A-5",
@@ -2245,7 +2317,8 @@
           "teamId": "T-21",
           "team": "Czechoslovakia",
           "teamCode": "CSK",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -2255,7 +2328,8 @@
           "teamId": "T-28",
           "team": "England",
           "teamCode": "ENG",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -2265,7 +2339,8 @@
           "teamId": "T-11",
           "team": "Cameroon",
           "teamCode": "CMR",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -2275,7 +2350,8 @@
           "teamId": "T-87",
           "team": "Yugoslavia",
           "teamCode": "YUG",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -2427,7 +2503,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -2437,7 +2514,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -2447,7 +2525,8 @@
           "teamId": "T-10",
           "team": "Bulgaria",
           "teamCode": "BGR",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -2457,7 +2536,8 @@
           "teamId": "T-62",
           "team": "Russia",
           "teamCode": "RUS",
-          "shared": true
+          "shared": true,
+          "goals": 6
         },
         {
           "awardId": "A-4",
@@ -2467,7 +2547,8 @@
           "teamId": "T-10",
           "team": "Bulgaria",
           "teamCode": "BGR",
-          "shared": true
+          "shared": true,
+          "goals": 6
         },
         {
           "awardId": "A-6",
@@ -2477,7 +2558,8 @@
           "teamId": "T-74",
           "team": "Sweden",
           "teamCode": "SWE",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -2487,7 +2569,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -2497,7 +2580,8 @@
           "teamId": "T-06",
           "team": "Belgium",
           "teamCode": "BEL",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -2507,7 +2591,8 @@
           "teamId": "T-48",
           "team": "Netherlands",
           "teamCode": "NLD",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -2699,7 +2784,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -2709,7 +2795,8 @@
           "teamId": "T-18",
           "team": "Croatia",
           "teamCode": "HRV",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -2719,7 +2806,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -2729,7 +2817,8 @@
           "teamId": "T-18",
           "team": "Croatia",
           "teamCode": "HRV",
-          "shared": false
+          "shared": false,
+          "goals": 6
         },
         {
           "awardId": "A-5",
@@ -2739,7 +2828,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -2749,7 +2839,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -2759,7 +2850,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -2769,7 +2861,8 @@
           "teamId": "T-28",
           "team": "England",
           "teamCode": "ENG",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -2962,7 +3055,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -2972,7 +3066,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -2982,7 +3077,8 @@
           "teamId": "T-71",
           "team": "South Korea",
           "teamCode": "KOR",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -2992,7 +3088,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": 8
         },
         {
           "awardId": "A-5",
@@ -3002,7 +3099,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-5",
@@ -3012,7 +3110,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": true
+          "shared": true,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -3022,7 +3121,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -3032,7 +3132,8 @@
           "teamId": "T-83",
           "team": "United States",
           "teamCode": "USA",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -3224,7 +3325,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -3234,7 +3336,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -3244,7 +3347,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -3254,7 +3358,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": 5
         },
         {
           "awardId": "A-5",
@@ -3264,7 +3369,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -3274,7 +3380,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -3284,7 +3391,8 @@
           "teamId": "T-41",
           "team": "Italy",
           "teamCode": "ITA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -3294,7 +3402,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -3486,7 +3595,8 @@
           "teamId": "T-84",
           "team": "Uruguay",
           "teamCode": "URY",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -3496,7 +3606,8 @@
           "teamId": "T-48",
           "team": "Netherlands",
           "teamCode": "NLD",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -3506,7 +3617,8 @@
           "teamId": "T-73",
           "team": "Spain",
           "teamCode": "ESP",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -3516,7 +3628,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": 5
         },
         {
           "awardId": "A-5",
@@ -3526,7 +3639,8 @@
           "teamId": "T-73",
           "team": "Spain",
           "teamCode": "ESP",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -3536,7 +3650,8 @@
           "teamId": "T-48",
           "team": "Netherlands",
           "teamCode": "NLD",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -3546,7 +3661,8 @@
           "teamId": "T-73",
           "team": "Spain",
           "teamCode": "ESP",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -3556,7 +3672,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -3748,7 +3865,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -3758,7 +3876,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -3768,7 +3887,8 @@
           "teamId": "T-48",
           "team": "Netherlands",
           "teamCode": "NLD",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -3778,7 +3898,8 @@
           "teamId": "T-16",
           "team": "Colombia",
           "teamCode": "COL",
-          "shared": false
+          "shared": false,
+          "goals": 6
         },
         {
           "awardId": "A-5",
@@ -3788,7 +3909,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -3798,7 +3920,8 @@
           "teamId": "T-09",
           "team": "Brazil",
           "teamCode": "BRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -3808,7 +3931,8 @@
           "teamId": "T-31",
           "team": "Germany",
           "teamCode": "DEU",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -3818,7 +3942,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -4010,7 +4135,8 @@
           "teamId": "T-18",
           "team": "Croatia",
           "teamCode": "HRV",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -4020,7 +4146,8 @@
           "teamId": "T-06",
           "team": "Belgium",
           "teamCode": "BEL",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -4030,7 +4157,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -4040,7 +4168,8 @@
           "teamId": "T-28",
           "team": "England",
           "teamCode": "ENG",
-          "shared": false
+          "shared": false,
+          "goals": 6
         },
         {
           "awardId": "A-5",
@@ -4050,7 +4179,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -4060,7 +4190,8 @@
           "teamId": "T-06",
           "team": "Belgium",
           "teamCode": "BEL",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -4070,7 +4201,8 @@
           "teamId": "T-06",
           "team": "Belgium",
           "teamCode": "BEL",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -4080,7 +4212,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -4272,7 +4405,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-2",
@@ -4282,7 +4416,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-3",
@@ -4292,7 +4427,8 @@
           "teamId": "T-18",
           "team": "Croatia",
           "teamCode": "HRV",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-4",
@@ -4302,7 +4438,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": 8
         },
         {
           "awardId": "A-5",
@@ -4312,7 +4449,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-6",
@@ -4322,7 +4460,8 @@
           "teamId": "T-30",
           "team": "France",
           "teamCode": "FRA",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-7",
@@ -4332,7 +4471,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         },
         {
           "awardId": "A-8",
@@ -4342,7 +4482,8 @@
           "teamId": "T-03",
           "team": "Argentina",
           "teamCode": "ARG",
-          "shared": false
+          "shared": false,
+          "goals": null
         }
       ]
     },
@@ -4951,7 +5092,52 @@
           "goalDifference": -9
         }
       ],
-      "awards": []
+      "awards": [
+        {
+          "awardId": null,
+          "award": "Golden Ball",
+          "playerId": null,
+          "player": "Rodri",
+          "teamId": "T-73",
+          "team": "Spain",
+          "teamCode": "ESP",
+          "shared": false,
+          "goals": null
+        },
+        {
+          "awardId": null,
+          "award": "Golden Boot",
+          "playerId": null,
+          "player": "Kylian Mbappé",
+          "teamId": "T-30",
+          "team": "France",
+          "teamCode": "FRA",
+          "shared": false,
+          "goals": 10
+        },
+        {
+          "awardId": null,
+          "award": "Golden Glove",
+          "playerId": null,
+          "player": "Unai Simón",
+          "teamId": "T-73",
+          "team": "Spain",
+          "teamCode": "ESP",
+          "shared": false,
+          "goals": null
+        },
+        {
+          "awardId": null,
+          "award": "Best Young Player",
+          "playerId": null,
+          "player": "Pau Cubarsí",
+          "teamId": "T-73",
+          "team": "Spain",
+          "teamCode": "ESP",
+          "shared": false,
+          "goals": null
+        }
+      ]
     }
   },
   "teams": {

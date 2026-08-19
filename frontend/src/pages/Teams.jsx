@@ -16,14 +16,20 @@ import {
 
 
 function Teams() {
-  const [allTeams, setAllTeams] =
-    useState([]);
+  const [
+    allTeams,
+    setAllTeams,
+  ] = useState([]);
 
-  const [loading, setLoading] =
-    useState(true);
+  const [
+    loading,
+    setLoading,
+  ] = useState(true);
 
-  const [error, setError] =
-    useState("");
+  const [
+    error,
+    setError,
+  ] = useState("");
 
   const [
     searchTerm,
@@ -79,16 +85,14 @@ function Teams() {
         setLoading(true);
         setError("");
 
-        /*
-         * Load the complete collection once.
-         *
-         * Tournament filtering happens in
-         * React so historical identities can
-         * be grouped under their modern
-         * country lineage.
-         */
         const data =
           await getPlatformTeams();
+
+        if (!Array.isArray(data)) {
+          throw new Error(
+            "Unexpected team data returned by the server."
+          );
+        }
 
         setAllTeams(data);
       } catch (err) {
@@ -110,20 +114,21 @@ function Teams() {
   }, []);
 
 
-  const teams = useMemo(() => {
-    const year =
-      selectedYear
-        ? Number(selectedYear)
-        : null;
+  const teams =
+    useMemo(() => {
+      const year =
+        selectedYear
+          ? Number(selectedYear)
+          : null;
 
-    return buildCanonicalTeams(
+      return buildCanonicalTeams(
+        allTeams,
+        year
+      );
+    }, [
       allTeams,
-      year
-    );
-  }, [
-    allTeams,
-    selectedYear,
-  ]);
+      selectedYear,
+    ]);
 
 
   const filteredTeams =
@@ -139,16 +144,29 @@ function Teams() {
             return true;
           }
 
-          return (
+          const displayName =
             team.displayName
-              .toLowerCase()
-              .includes(search) ||
+              ?.toLowerCase() || "";
+
+          const matchesDisplayName =
+            displayName.includes(
+              search
+            );
+
+          const matchesHistoricalIdentity =
             team.editionIdentities
-              ?.some((identity) =>
-                identity
-                  .toLowerCase()
-                  .includes(search)
-              )
+              ?.some(
+                (identity) =>
+                  identity
+                    .toLowerCase()
+                    .includes(
+                      search
+                    )
+              );
+
+          return (
+            matchesDisplayName ||
+            matchesHistoricalIdentity
           );
         })
         .filter((team) => {
@@ -190,12 +208,39 @@ function Teams() {
     ]);
 
 
+  function handleClearFilters() {
+    setSearchTerm("");
+    setSelectedYear("");
+    setChampionsOnly(false);
+    setSortOption("name");
+  }
+
+
+  const hasActiveFilters =
+    Boolean(
+      searchTerm ||
+      selectedYear ||
+      championsOnly ||
+      sortOption !== "name"
+    );
+
+
   if (loading) {
     return (
       <div className="page-container">
-        <h1>
-          Loading teams...
-        </h1>
+        <div className="teams-page-header">
+          <p className="section-eyebrow">
+            National Teams
+          </p>
+
+          <h1>
+            World Cup Teams
+          </h1>
+
+          <p>
+            Loading World Cup teams...
+          </p>
+        </div>
       </div>
     );
   }
@@ -204,11 +249,31 @@ function Teams() {
   if (error) {
     return (
       <div className="page-container">
-        <h1>
-          World Cup Teams
-        </h1>
+        <div className="teams-page-header">
+          <p className="section-eyebrow">
+            National Teams
+          </p>
 
-        <p>{error}</p>
+          <h1>
+            World Cup Teams
+          </h1>
+
+          <p>
+            Explore national teams
+            across every FIFA Men's
+            World Cup.
+          </p>
+        </div>
+
+        <div className="teams-error">
+          <strong>
+            Unable to load teams.
+          </strong>
+
+          <p>
+            {error}
+          </p>
+        </div>
       </div>
     );
   }
@@ -217,109 +282,152 @@ function Teams() {
   return (
     <div className="page-container">
       <div className="teams-page-header">
+        <p className="section-eyebrow">
+          National Teams
+        </p>
+
         <h1>
           World Cup Teams
         </h1>
 
         <p>
-          Explore national teams
-          across every FIFA Men's
-          World Cup.
+          Explore countries across
+          every FIFA Men's World Cup,
+          including historical
+          identities and
+          edition-specific squads.
         </p>
       </div>
 
 
-      <div className="filters">
-        <input
-          type="text"
-          placeholder="Search teams..."
-          value={searchTerm}
-          onChange={(event) =>
-            setSearchTerm(
-              event.target.value
-            )
-          }
-          className="search-input"
-        />
-
-
-        <select
-          value={selectedYear}
-          onChange={(event) =>
-            setSelectedYear(
-              event.target.value
-            )
-          }
-          className="filter-select"
-        >
-          <option value="">
-            All World Cups
-          </option>
-
-          {tournamentYears.map(
-            (year) => (
-              <option
-                key={year}
-                value={year}
-              >
-                {year}
-              </option>
-            )
-          )}
-        </select>
-
-
-        <select
-          value={sortOption}
-          onChange={(event) =>
-            setSortOption(
-              event.target.value
-            )
-          }
-          className="filter-select"
-        >
-          <option value="name">
-            Sort by Name
-          </option>
-
-          <option value="championships">
-            Sort by Championships
-          </option>
-        </select>
-
-
-        <label className="checkbox-filter">
+      <section className="teams-filter-panel">
+        <div className="filters">
           <input
-            type="checkbox"
-            checked={
-              championsOnly
-            }
+            type="text"
+            placeholder="Search teams..."
+            value={searchTerm}
             onChange={(event) =>
-              setChampionsOnly(
-                event.target.checked
+              setSearchTerm(
+                event.target.value
               )
             }
+            className="search-input"
           />
 
-          Champions only
-        </label>
+
+          <select
+            value={selectedYear}
+            onChange={(event) =>
+              setSelectedYear(
+                event.target.value
+              )
+            }
+            className="filter-select"
+          >
+            <option value="">
+              All World Cups
+            </option>
+
+            {tournamentYears.map(
+              (year) => (
+                <option
+                  key={year}
+                  value={year}
+                >
+                  {year}
+                </option>
+              )
+            )}
+          </select>
+
+
+          <select
+            value={sortOption}
+            onChange={(event) =>
+              setSortOption(
+                event.target.value
+              )
+            }
+            className="filter-select"
+          >
+            <option value="name">
+              Sort by Name
+            </option>
+
+            <option value="championships">
+              Sort by Championships
+            </option>
+          </select>
+
+
+          <label className="checkbox-filter">
+            <input
+              type="checkbox"
+              checked={
+                championsOnly
+              }
+              onChange={(event) =>
+                setChampionsOnly(
+                  event.target.checked
+                )
+              }
+            />
+
+            Champions only
+          </label>
+
+
+          {hasActiveFilters && (
+            <button
+              type="button"
+              className="clear-filters-button"
+              onClick={
+                handleClearFilters
+              }
+            >
+              Clear Filters
+            </button>
+          )}
+        </div>
+      </section>
+
+
+      <div className="teams-results-header">
+        <p className="teams-result-count">
+          Showing{" "}
+          <strong>
+            {
+              filteredTeams.length
+            }
+          </strong>{" "}
+          {selectedYear
+            ? `countries represented at the ${selectedYear} World Cup`
+            : "World Cup countries"}
+        </p>
       </div>
 
 
-      <p className="teams-result-count">
-        Showing{" "}
-        {filteredTeams.length}{" "}
-        {selectedYear
-          ? `countries represented at the ${selectedYear} World Cup`
-          : "World Cup countries"}
-      </p>
+      {filteredTeams.length ===
+      0 ? (
+        <div className="teams-empty-state">
+          <h2>
+            No teams found
+          </h2>
 
+          <p>
+            No teams match your
+            current filters.
+          </p>
 
-      {filteredTeams.length === 0 ? (
-        <p>
-          No teams match your
-          current filters.
-        </p>
+          <button
+            type="button"
+            onClick={
+              handleClearFilters
+            }
+          >
+            Reset Filters
+          </button>
+        </div>
       ) : (
         <div className="card-grid">
           {filteredTeams.map(
