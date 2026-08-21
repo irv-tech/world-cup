@@ -219,3 +219,26 @@ __marimo__/
 
 temp-worldcup/
 backend/data/world_cup_stats_source.json
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Node
+node_modules/
+dist/
+
+# Local archives
+*.zip
